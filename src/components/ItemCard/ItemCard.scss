@@ -1,0 +1,23 @@
+.itemCard {
+  display: flex;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  padding: 1.6rem;
+  gap: 1.6rem;
+
+  &-img {
+    height: 14rem;
+    width: 14rem;
+    object-fit: contain;
+    border-radius: 0.5rem;
+  }
+  &-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-btns {
+    display: flex;
+    flex-direction: column;
+  }
+}

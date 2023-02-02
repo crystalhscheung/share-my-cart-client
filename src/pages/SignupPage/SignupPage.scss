@@ -1,0 +1,46 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.signup {
+  height: 65vh;
+  margin: auto;
+  @include flex-center(column);
+  gap: 1.6rem;
+  background-color: $cream-background;
+
+  &-title {
+    font-size: 3.2rem;
+  }
+
+  &-form {
+    @include flex-center(column);
+    gap: 1.6rem;
+    width: 50rem;
+
+    &__input {
+      border: 1.5px solid $lightgreen-background;
+      height: 3.5rem;
+      padding: 0 1.6rem;
+      border-radius: 0.4rem;
+
+      &:focus {
+        border-color: #267537;
+      }
+    }
+
+    &__btn {
+      width: 21rem;
+      height: 4rem;
+      border: none;
+      background-color: #267537;
+      border-radius: 0.4rem;
+      color: $cream-background;
+      font-family: "NunitoSans";
+      font-size: 1.8rem;
+
+      &:hover {
+        background-color: $darkgreen-font;
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.detail {
+  display: flex;
+  padding: 1.6rem;
+  gap: 1.6rem;
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+}

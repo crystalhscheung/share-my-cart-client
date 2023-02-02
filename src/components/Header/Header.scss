@@ -1,0 +1,97 @@
+@use "../../styles/partials/variables" as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10rem;
+  padding: 0 1.6rem;
+  background-color: $lightgreen-background;
+
+  &__title {
+    color: $darkgreen-font;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  &-searchbar {
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    // border: 0.1rem red solid;
+
+    &__input {
+      border: 0.1rem solid $darkgreen-font;
+      // background-color: $cream-background;
+      height: 3rem;
+      border-top-left-radius: 2rem;
+      border-bottom-left-radius: 2rem;
+      padding: 0 1.6rem;
+      border-right: 0px;
+    }
+
+    &__btn {
+      background-color: transparent;
+      border: 0.1rem solid $darkgreen-font;
+      height: 3.2rem;
+      border-top-right-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+    }
+  }
+
+  &-acc {
+    position: relative;
+    display: inline-block;
+
+    &__dropdown {
+      display: none;
+      position: absolute;
+      width: 8rem;
+      background-color: $cream-background;
+      flex-direction: column;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      border-radius: 0.4rem;
+      z-index: 1;
+      align-items: center;
+      right: -2.5rem;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border: 0.8rem solid transparent;
+        border-bottom: 0.8rem solid $cream-background;
+        border-top: 0;
+        margin-left: -0.8rem;
+        margin-top: -0.6rem;
+      }
+
+      &-link {
+        width: 100%;
+        text-align: center;
+
+        &:hover {
+          background-color: #faefce;
+          border-radius: 0.4rem;
+          // border: 2px solid #917b73;
+          // color: #917b73;
+        }
+      }
+    }
+
+    &:hover &__dropdown {
+      display: flex;
+    }
+  }
+}
+
+.icon {
+  height: 3rem;
+}

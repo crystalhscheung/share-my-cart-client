@@ -1,0 +1,16 @@
+.profile {
+  padding: 1.6rem;
+  display: flex;
+  gap: 2.4rem;
+
+  &-data {
+    text-align: center;
+
+    &__avatar {
+      height: 10rem;
+      width: 10rem;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+}

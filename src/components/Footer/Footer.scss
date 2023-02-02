@@ -1,0 +1,9 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.footer {
+  background-color: $lightgreen-background;
+  height: 15rem;
+  color: $darkgreen-font;
+  @include flex-center;
+}
