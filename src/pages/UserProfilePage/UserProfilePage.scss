@@ -4,7 +4,10 @@
   gap: 2.4rem;
 
   &-data {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 
     &__avatar {
       height: 10rem;

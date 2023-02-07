@@ -3,14 +3,24 @@ import "./Header.scss";
 import searchIcon from "../../assets/icons/search.svg";
 import accountIcon from "../../assets/icons/account.svg";
 import shoppingcartIcon from "../../assets/icons/shopping_cart.svg";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export default function Header() {
   const navigate = useNavigate();
+  const { currentUser, isLoggedin, setCurrentUser, setIsLoggedin } =
+    useContext(UserContext);
 
   const submitHandler = (e) => {
     e.preventDefault();
     navigate(`/items/?search=${e.target.search.value}`);
     e.target.reset();
+  };
+
+  const onLogout = () => {
+    sessionStorage.removeItem("JWTtoken");
+    setIsLoggedin(false);
+    setCurrentUser(null);
   };
 
   return (
@@ -26,18 +36,48 @@ export default function Header() {
           </button>
         </form>
         <div className="nav-acc">
-          <img
-            src={accountIcon}
-            className="nav-acc__icon icon"
-            alt="account icon"
-          />
+          {!currentUser && (
+            <img
+              src={accountIcon}
+              className="nav-acc__icon icon"
+              alt="account icon"
+            />
+          )}
+          {currentUser && (
+            <img
+              src={`http://localhost:8080/avatars/${
+                currentUser.avatar ?? "avatar_placeholder.jpeg"
+              }`}
+              className="nav-acc__avatar icon"
+              alt="account icon"
+            />
+          )}
           <div className="nav-acc__dropdown">
-            <Link className="nav-acc__dropdown-link" to="/login">
-              Log In
-            </Link>
-            <Link className="nav-acc__dropdown-link" to="/signup">
-              Sign Up
-            </Link>
+            {!isLoggedin && (
+              <Link className="nav-acc__dropdown-link" to="/login">
+                Log In
+              </Link>
+            )}
+            {isLoggedin && (
+              <Link
+                className="nav-acc__dropdown-link"
+                to="/"
+                onClick={onLogout}>
+                Log Out
+              </Link>
+            )}
+            {!currentUser && (
+              <Link className="nav-acc__dropdown-link" to="/signup">
+                Sign up
+              </Link>
+            )}
+            {currentUser && (
+              <Link
+                className="nav-acc__dropdown-link"
+                to={`/user/${currentUser.id}`}>
+                View Profile
+              </Link>
+            )}
           </div>
         </div>
         <img
