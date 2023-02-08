@@ -1,13 +1,12 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import "./ItemCard.scss";
 
 export default function ItemCard({ item }) {
   const { currentUser } = useContext(UserContext);
   const [isThatUser, setIsThatUser] = useState(false);
-  const navigate = useNavigate();
   useEffect(() => {
     if (!currentUser) {
       return;
@@ -18,8 +17,7 @@ export default function ItemCard({ item }) {
   }, [currentUser]);
 
   const deleteHandler = (e) => {
-    e.stopPropagation();
-    const deleteItem = async () => {
+    const deleteItem = async (e) => {
       console.log("In delete handler");
       const token = sessionStorage.getItem("JWTtoken");
 
@@ -32,9 +30,26 @@ export default function ItemCard({ item }) {
         }
       );
       console.log(data);
-      navigate(`/user/${item.user_id}`);
     };
     deleteItem();
+  };
+
+  const addToCartHandler = (e) => {
+    const addItemToCart = async () => {
+      const token = sessionStorage.getItem("JWTtoken");
+
+      const { data } = await axios.post(
+        `http://localhost:8080/cart/${item.id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(data);
+    };
+    addItemToCart();
   };
 
   return (
@@ -48,25 +63,37 @@ export default function ItemCard({ item }) {
       <div className="itemCard-info">
         <h3 className="itemCard-info__name">{item.item_name}</h3>
         <Link to={`/user/${item.user_id}`}>
-          <span className="itemCard-info__user">{item.username}</span>
+          <span className="itemCard-info__user">{`From ${item.username}`}</span>
         </Link>
-        <span className="itemCard-info__quantity">{item.quantity}</span>
-        <span className="itemCard-info__price">{`$${item.price}`}</span>
+        <span className="itemCard-info__quantity">{`Quantity: ${item.quantity}`}</span>
+        <span className="itemCard-info__price">{`Price: $${item.price}`}</span>
       </div>
       <div className="itemCard-btns">
         {!isThatUser && (
-          <button className="itemCard-btns__add">Add to Cart</button>
+          <Link
+            to={`/user/cart`}
+            onClick={addToCartHandler}
+            className="itemCard-btn itemCard-btn__add">
+            +Cart
+          </Link>
         )}
-        {!isThatUser && <button className="itemCard-btns__buy">Buy Now</button>}
+        {!isThatUser && (
+          <button className="itemCard-btn itemCard-btn__buy">Buy Now</button>
+        )}
         {isThatUser && (
-          <Link to={`/items/edit/${item.id}`} className="itemCard-btns__edit">
+          <Link
+            to={`/items/edit/${item.id}`}
+            className="itemCard-btn itemCard-btn__edit">
             Edit
           </Link>
         )}
         {isThatUser && (
-          <button onClick={deleteHandler} className="itemCard-btns__del">
+          <Link
+            to={`/user/${currentUser.id}`}
+            onClick={deleteHandler}
+            className="itemCard-btn itemCard-btn__del">
             Delete
-          </button>
+          </Link>
         )}
       </div>
     </Link>

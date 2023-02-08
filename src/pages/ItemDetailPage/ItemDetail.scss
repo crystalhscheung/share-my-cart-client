@@ -1,11 +1,38 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
 .detail {
   display: flex;
   padding: 1.6rem;
   gap: 1.6rem;
 
+  &-img {
+    width: 30rem;
+  }
+
   &-info {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+
+    &-btns {
+      display: flex;
+      gap: 1.6rem;
+    }
+
+    &-btn {
+      background-color: $forestgreen-background;
+      color: white;
+      padding: 0 1.6rem;
+      border-radius: 2rem;
+      height: 3rem;
+      width: fit-content;
+      @include flex-center;
+      border: none;
+
+      &:hover {
+        background-color: $darkgreen-font;
+      }
+    }
   }
 }

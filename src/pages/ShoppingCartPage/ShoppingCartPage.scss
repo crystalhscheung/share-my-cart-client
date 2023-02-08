@@ -1,0 +1,32 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.cart {
+  padding: 1.6rem;
+
+  &-total {
+    border-top: 1px solid $darkgreen-font;
+    padding: 1.6rem 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    font-size: 2.3rem;
+
+    &__btn {
+      font-size: 2rem;
+      background-color: #267537;
+      border: none;
+      color: white;
+      height: 4rem;
+      border-radius: 2rem;
+      padding: 0 1.6rem;
+      font-family: "NunitoSans";
+
+      &:hover {
+        cursor: pointer;
+        background-color: $darkgreen-font;
+      }
+    }
+  }
+}

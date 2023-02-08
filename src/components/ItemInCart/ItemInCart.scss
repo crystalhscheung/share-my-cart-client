@@ -1,0 +1,83 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.itemCart {
+  display: flex;
+  gap: 2rem;
+  position: relative;
+  padding: 1.6rem;
+
+  &-img {
+    width: 10rem;
+  }
+
+  &-remove {
+    position: absolute;
+    top: 0rem;
+    right: 2rem;
+    border: none;
+    background: none;
+    color: $darkgreen-font;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+    }
+  }
+
+  &-info {
+    width: 25rem;
+  }
+
+  &-quantity {
+    width: 30rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 2rem;
+
+    &-bar {
+      display: flex;
+      align-items: center;
+
+      &__btn {
+        border: none;
+        background-color: #267537;
+        height: 2.3rem;
+        width: 2.3rem;
+        color: white;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $darkgreen-font;
+        }
+      }
+
+      &__field {
+        width: 4rem;
+        text-align: center;
+      }
+    }
+
+    &__max {
+      font-size: 2.2rem;
+    }
+  }
+
+  &-total {
+    @include flex-center;
+    font-size: 2.2rem;
+  }
+}
+
+//Google Chrome
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+//Firefox
+input[type="number"] {
+  -moz-appearance: textfield;
+}

@@ -100,8 +100,10 @@ export default function ItemForm({ submitHandler, currentItem, buttonTxt }) {
         </label>
       </div>
       <div className="form-btns">
-        <button>Cancel</button>
-        <button type="submit">{buttonTxt}</button>
+        <button className="form-btn form-btn__cancel">Cancel</button>
+        <button className="form-btn form-btn__save" type="submit">
+          {buttonTxt}
+        </button>
       </div>
     </form>
   );

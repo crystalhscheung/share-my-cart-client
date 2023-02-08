@@ -1,3 +1,6 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
 .profile {
   padding: 1.6rem;
   display: flex;
@@ -8,6 +11,14 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    gap: 1rem;
+
+    &__edit,
+    &__upload {
+      &:hover {
+        border-bottom: 1px $darkgreen-font solid;
+      }
+    }
 
     &__avatar {
       height: 10rem;
@@ -15,5 +26,11 @@
       object-fit: cover;
       border-radius: 50%;
     }
+  }
+
+  &-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
   }
 }

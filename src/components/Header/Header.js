@@ -80,11 +80,23 @@ export default function Header() {
             )}
           </div>
         </div>
-        <img
-          src={shoppingcartIcon}
-          className="nav-shoppingcart icon"
-          alt="shopping cart icon"
-        />
+        {!currentUser && (
+          <img
+            src={shoppingcartIcon}
+            className="nav-shoppingcart icon"
+            alt="shopping cart icon"
+          />
+        )}
+        {currentUser && (
+          <Link to="/user/cart" className="nav-shoppingcart icon">
+            {" "}
+            <img
+              src={shoppingcartIcon}
+              className="nav-shoppingcart icon"
+              alt="shopping cart icon"
+            />
+          </Link>
+        )}
       </nav>
     </header>
   );

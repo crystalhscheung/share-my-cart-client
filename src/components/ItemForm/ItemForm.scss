@@ -1,0 +1,43 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  &-data {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input {
+    border: 1.5px solid $lightgreen-background;
+    width: 30rem;
+  }
+
+  &-btns {
+    display: flex;
+    gap: 1.6rem;
+  }
+
+  &-btn {
+    background-color: $forestgreen-background;
+    color: white;
+    padding: 0 1.6rem;
+    border-radius: 2rem;
+    height: 3rem;
+    width: fit-content;
+    @include flex-center;
+    border: none;
+
+    &:hover {
+      background-color: $darkgreen-font;
+    }
+  }
+}

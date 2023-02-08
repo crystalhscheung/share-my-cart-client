@@ -4,25 +4,3 @@
 .upload {
   padding: 1.6rem;
 }
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-
-  &-data {
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
-  }
-
-  &__label {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__input {
-    border: 1.5px solid $lightgreen-background;
-    width: 30rem;
-  }
-}

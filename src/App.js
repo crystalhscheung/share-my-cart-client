@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import EditProfilePage from "./pages/EditProfilePage/EditProfilePage";
 import EditItemPage from "./pages/EditItemPage/EditItemPage";
+import ShoppingCartPage from "./pages/ShoppingCartPage/ShoppingCartPage";
 
 function App() {
   const [isLoggedin, setIsLoggedin] = useState(
@@ -37,8 +38,6 @@ function App() {
     autoLogin();
   }, [isLoggedin]);
 
-  // console.log(isLoggedin && currentUser.username);
-
   return (
     <div className="App">
       <UserContext.Provider
@@ -56,6 +55,7 @@ function App() {
             <Route path="/items/:itemId" element={<ItemDetail />} />
             <Route path="/items/edit/:itemId" element={<EditItemPage />} />
             <Route path="/user/:userId" element={<UserProfilePage />} />
+            <Route path="/user/cart" element={<ShoppingCartPage />} />
             <Route path="/user/edit/:userId" element={<EditProfilePage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />

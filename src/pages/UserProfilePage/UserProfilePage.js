@@ -17,7 +17,7 @@ export default function UserProfilePage() {
           Authorization: `Bearer ${token}`,
         },
       });
-      // console.log(data);
+      console.log(data);
       setIsThatUser(data.isThatUser);
       setUser(data.user);
     };

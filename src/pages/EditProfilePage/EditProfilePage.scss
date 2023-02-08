@@ -1,0 +1,33 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.editprofile {
+  height: 60vh;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  &-form {
+    display: flex;
+
+    &__input {
+      border: 1px $darkgreen-font soli;
+    }
+
+    &__btn {
+      background-color: $forestgreen-background;
+      color: white;
+      padding: 0 1.6rem;
+      border-radius: 2rem;
+      height: 3rem;
+      width: fit-content;
+      @include flex-center;
+      border: none;
+
+      &:hover {
+        background-color: $darkgreen-font;
+      }
+    }
+  }
+}

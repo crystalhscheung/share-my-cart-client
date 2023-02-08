@@ -23,31 +23,24 @@ export default function EditProfilePage() {
       );
     };
     updateAvatar();
-    const token = sessionStorage.getItem("JWTtoken");
-
-    const autoLogin = async () => {
-      const { data } = await axios.get("http://localhost:8080/user/autologin", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setCurrentUser(data.user);
-    };
-    autoLogin();
 
     navigate(`/user/${currentUser.id}`);
   };
 
   return (
     <main className="editprofile">
-      <form onSubmit={submitHandler}>
+      <h2 className="editprofile-title">Edit your avatar</h2>
+      <form onSubmit={submitHandler} className="editprofile-form">
         <input
+          className="editprofile-form__input"
           type="file"
           name="avatar"
           accept="images/*"
           onChange={(e) => setAvatar(e.target.files[0])}
         />
-        <button type="submit">Update</button>
+        <button className="editprofile-form__btn" type="submit">
+          Update
+        </button>
       </form>
     </main>
   );
