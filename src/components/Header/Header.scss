@@ -76,11 +76,15 @@
         left: 50%;
         width: 0;
         height: 0;
-        border: 0.8rem solid transparent;
-        border-bottom: 0.8rem solid $cream-background;
+        border: 0.5rem solid transparent;
+        border-bottom: 0.5rem solid $cream-background;
         border-top: 0;
-        margin-left: -0.8rem;
+        margin-left: -0.5rem;
         margin-top: -0.3rem;
+
+        &:hover {
+          background-color: #faefce;
+        }
       }
 
       &-link {

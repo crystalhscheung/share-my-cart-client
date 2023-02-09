@@ -1,11 +1,12 @@
 import "./SignupPage.scss";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 export default function SignUpPage() {
-  const { setIsLoggedin } = useContext(UserContext);
+  const { setIsLoggedin, isLoggedin, currentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -28,6 +29,46 @@ export default function SignUpPage() {
     signup();
     navigate("/");
   };
+
+  const handleCallbackResponse = (res) => {
+    console.log("Encoded JWT ID token: " + res.credential);
+    const googleUser = jwt_decode(res.credential);
+    console.log(googleUser);
+
+    const userFromGoogle = {
+      username: googleUser.given_name,
+      email: googleUser.email,
+      avatar: googleUser.picture,
+      is_login_with_google: true,
+    };
+
+    const loginWithGoogle = async () => {
+      const { data } = await axios.post(
+        "http://localhost:8080/user/google",
+        userFromGoogle
+      );
+      // console.log(data);
+      sessionStorage.setItem("JWTtoken", data.token);
+      setIsLoggedin(true);
+      console.log(isLoggedin, currentUser);
+      navigate("/");
+    };
+    loginWithGoogle();
+  };
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:
+        "226234521231-2ftfkolcj5r67fs714u6afi6tdvlbhr3.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      theme: "outline",
+      size: "large",
+    });
+  }, []);
 
   return (
     <main className="signup">
@@ -61,6 +102,7 @@ export default function SignUpPage() {
           Sign up
         </button>
       </form>
+      <div id="signInDiv"></div>
     </main>
   );
 }

@@ -7,6 +7,7 @@ import "./UserProfilePage.scss";
 export default function UserProfilePage() {
   const [user, setUser] = useState(null);
   const [isThatUser, setIsThatUser] = useState(false);
+  const [avatar, setAvatar] = useState("");
   const { userId } = useParams();
 
   useEffect(() => {
@@ -24,17 +25,24 @@ export default function UserProfilePage() {
     getProfile();
   }, [userId]);
 
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    if (!user.avatar) {
+      setAvatar("http://localhost:8080/avatars/avatar_placeholder.jpeg");
+    } else if (user.avatar.slice(0, 5) == "https") {
+      setAvatar(user.avatar);
+    } else if (user.avatar) {
+      setAvatar(`http://localhost:8080/avatars/${user.avatar}`);
+    }
+  }, [user]);
+
   return (
     <main className="profile">
       <div className="profile-data">
-        {user && (
-          <img
-            className="profile-data__avatar"
-            alt="avatar"
-            src={`http://localhost:8080/avatars/${
-              user.avatar ?? "avatar_placeholder.jpeg"
-            }`}
-          />
+        {avatar && (
+          <img className="profile-data__avatar" alt="avatar" src={avatar} />
         )}
         <h2 className="profile-data__name">{user && user.username}</h2>
         {isThatUser && (

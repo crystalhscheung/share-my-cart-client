@@ -3,11 +3,12 @@ import "./Header.scss";
 import searchIcon from "../../assets/icons/search.svg";
 import accountIcon from "../../assets/icons/account.svg";
 import shoppingcartIcon from "../../assets/icons/shopping_cart.svg";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 
 export default function Header() {
   const navigate = useNavigate();
+  const [avatar, setAvatar] = useState("");
   const { currentUser, isLoggedin, setCurrentUser, setIsLoggedin } =
     useContext(UserContext);
 
@@ -22,6 +23,19 @@ export default function Header() {
     setIsLoggedin(false);
     setCurrentUser(null);
   };
+
+  useEffect(() => {
+    if (!currentUser) {
+      return;
+    }
+    if (!currentUser.avatar) {
+      setAvatar("http://localhost:8080/avatars/avatar_placeholder.jpeg");
+    } else if (currentUser.avatar.slice(0, 5) == "https") {
+      setAvatar(currentUser.avatar);
+    } else if (currentUser.avatar) {
+      setAvatar(`http://localhost:8080/avatars/${currentUser.avatar}`);
+    }
+  }, [currentUser]);
 
   return (
     <header className="header">
@@ -45,9 +59,7 @@ export default function Header() {
           )}
           {currentUser && (
             <img
-              src={`http://localhost:8080/avatars/${
-                currentUser.avatar ?? "avatar_placeholder.jpeg"
-              }`}
+              src={avatar}
               className="nav-acc__avatar icon"
               alt="account icon"
             />
