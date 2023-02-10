@@ -6,11 +6,11 @@ import { UserContext } from "../../context/UserContext";
 import jwt_decode from "jwt-decode";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { setIsLoggedin, isLoggedin, currentUser } = useContext(UserContext);
-
-  const navigate = useNavigate();
+  const { setIsLoggedin, isLoggedin, currentUser, setCurrentUser } =
+    useContext(UserContext);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -21,6 +21,20 @@ export default function LoginPage() {
       });
       sessionStorage.setItem("JWTtoken", data.token);
       setIsLoggedin(true);
+
+      const token = sessionStorage.getItem("JWTtoken");
+      const getUserWithToken = async () => {
+        const { data } = await axios.get(
+          "http://localhost:8080/user/autologin",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setCurrentUser(data.user);
+      };
+      getUserWithToken();
       navigate("/");
     };
     login();

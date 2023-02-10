@@ -12,7 +12,7 @@ export default function Header() {
   const { currentUser, isLoggedin, setCurrentUser, setIsLoggedin } =
     useContext(UserContext);
 
-  const submitHandler = (e) => {
+  const submitSearchHandler = (e) => {
     e.preventDefault();
     navigate(`/items/?search=${e.target.search.value}`);
     e.target.reset();
@@ -43,7 +43,7 @@ export default function Header() {
         <h1 className="header__title">Share My Chart</h1>
       </Link>
       <nav className="nav">
-        <form className="nav-searchbar" onSubmit={submitHandler}>
+        <form className="nav-searchbar" onSubmit={submitSearchHandler}>
           <input type="search" name="search" className="nav-searchbar__input" />
           <button type="submit" className="nav-searchbar__btn">
             <img src={searchIcon} alt="search icon" className="icon" />
@@ -65,12 +65,12 @@ export default function Header() {
             />
           )}
           <div className="nav-acc__dropdown">
-            {!isLoggedin && (
+            {!currentUser && (
               <Link className="nav-acc__dropdown-link" to="/login">
                 Log In
               </Link>
             )}
-            {isLoggedin && (
+            {currentUser && (
               <Link
                 className="nav-acc__dropdown-link"
                 to="/"
@@ -101,7 +101,6 @@ export default function Header() {
         )}
         {currentUser && (
           <Link to="/user/cart" className="nav-shoppingcart icon">
-            {" "}
             <img
               src={shoppingcartIcon}
               className="nav-shoppingcart icon"

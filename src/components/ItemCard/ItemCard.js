@@ -18,7 +18,6 @@ export default function ItemCard({ item }) {
 
   const deleteHandler = (e) => {
     const deleteItem = async (e) => {
-      console.log("In delete handler");
       const token = sessionStorage.getItem("JWTtoken");
 
       const { data } = await axios.delete(
@@ -29,7 +28,7 @@ export default function ItemCard({ item }) {
           },
         }
       );
-      console.log(data);
+      // console.log(data);
     };
     deleteItem();
   };
