@@ -35,9 +35,11 @@ export default function ItemCard({ item }) {
   };
 
   const addToCartHandler = (e) => {
+    const token = sessionStorage.getItem("JWTtoken");
+    if (!token) {
+      return;
+    }
     const addItemToCart = async () => {
-      const token = sessionStorage.getItem("JWTtoken");
-
       const { data } = await axios.post(
         `http://localhost:8080/cart/${item.id}`,
         {},
@@ -71,7 +73,7 @@ export default function ItemCard({ item }) {
       <div className="itemCard-btns">
         {!isThatUser && (
           <Link
-            to={`/user/cart`}
+            to={currentUser ? "/user/cart" : "/login"}
             onClick={addToCartHandler}
             className="itemCard-btn itemCard-btn__add">
             +Cart

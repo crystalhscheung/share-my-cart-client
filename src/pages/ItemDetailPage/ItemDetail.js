@@ -53,9 +53,11 @@ export default function ItemDetail() {
   };
 
   const addToCartHandler = (e) => {
+    const token = sessionStorage.getItem("JWTtoken");
+    if (!token) {
+      return;
+    }
     const addItemToCart = async () => {
-      const token = sessionStorage.getItem("JWTtoken");
-
       const { data } = await axios.post(
         `http://localhost:8080/cart/${item.id}`,
         {},
@@ -104,7 +106,7 @@ export default function ItemDetail() {
         <div className="detail-info-btns">
           {!isThatUser && (
             <Link
-              to={`/user/cart`}
+              to={currentUser ? "/user/cart" : "/login"}
               onClick={addToCartHandler}
               className="detail-info-btn detail-info-btn__add">
               +Cart

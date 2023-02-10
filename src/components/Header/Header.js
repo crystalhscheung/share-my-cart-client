@@ -30,7 +30,7 @@ export default function Header() {
     }
     if (!currentUser.avatar) {
       setAvatar("http://localhost:8080/avatars/avatar_placeholder.jpeg");
-    } else if (currentUser.avatar.slice(0, 5) == "https") {
+    } else if (currentUser.avatar.slice(0, 5) === "https") {
       setAvatar(currentUser.avatar);
     } else if (currentUser.avatar) {
       setAvatar(`http://localhost:8080/avatars/${currentUser.avatar}`);

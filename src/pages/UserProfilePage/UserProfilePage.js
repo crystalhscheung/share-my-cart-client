@@ -31,7 +31,7 @@ export default function UserProfilePage() {
     }
     if (!user.avatar) {
       setAvatar("http://localhost:8080/avatars/avatar_placeholder.jpeg");
-    } else if (user.avatar.slice(0, 5) == "https") {
+    } else if (user.avatar.slice(0, 5) === "https") {
       setAvatar(user.avatar);
     } else if (user.avatar) {
       setAvatar(`http://localhost:8080/avatars/${user.avatar}`);
