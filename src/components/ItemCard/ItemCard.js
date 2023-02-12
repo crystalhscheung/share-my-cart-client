@@ -17,8 +17,7 @@ export default function ItemCard({ item }) {
   }, [currentUser]);
 
   const deleteHandler = (e) => {
-    const deleteItem = async () => {
-      console.log("In delete handler");
+    const deleteItem = async (e) => {
       const token = sessionStorage.getItem("JWTtoken");
 
       const { data } = await axios.delete(
@@ -29,7 +28,7 @@ export default function ItemCard({ item }) {
           },
         }
       );
-      console.log(data);
+      // console.log(data);
     };
     deleteItem();
   };

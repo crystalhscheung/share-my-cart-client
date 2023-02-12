@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 export default function SignUpPage() {
-  const { setIsLoggedin, isLoggedin, currentUser } = useContext(UserContext);
+  const { setIsLoggedin, isLoggedin, currentUser, setCurrentUser } =
+    useContext(UserContext);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -22,9 +23,23 @@ export default function SignUpPage() {
         email,
         password,
       });
-      console.log(data);
       sessionStorage.setItem("JWTtoken", data.token);
       setIsLoggedin(true);
+      // setCurrentUser();
+
+      // const token = sessionStorage.getItem("JWTtoken");
+      // const getUserWithToken = async () => {
+      //   const { data } = await axios.get(
+      //     "http://localhost:8080/user/autologin",
+      //     {
+      //       headers: {
+      //         Authorization: `Bearer ${token}`,
+      //       },
+      //     }
+      //   );
+      //   setCurrentUser(data.user);
+      // };
+      // getUserWithToken();
     };
     signup();
     navigate("/");

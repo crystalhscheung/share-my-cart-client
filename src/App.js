@@ -9,7 +9,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import UserProfilePage from "./pages/UserProfilePage/UserProfilePage";
 import ItemsPage from "./pages/ItemsPage/ItemsPage";
 import ItemDetail from "./pages/ItemDetailPage/ItemDetail";
-import { UserContext } from "./context/UserContext";
+import { UserContext, UserContextProvider } from "./context/UserContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import EditProfilePage from "./pages/EditProfilePage/EditProfilePage";
@@ -17,36 +17,16 @@ import EditItemPage from "./pages/EditItemPage/EditItemPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage/ShoppingCartPage";
 
 function App() {
-  const [isLoggedin, setIsLoggedin] = useState(
-    !!sessionStorage.getItem("JWTtoken")
-  );
-  const [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    if (!isLoggedin) {
-      return;
-    }
-    const token = sessionStorage.getItem("JWTtoken");
-    const autoLogin = async () => {
-      const { data } = await axios.get("http://localhost:8080/user/autologin", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setCurrentUser(data.user);
-    };
-    autoLogin();
-  }, [isLoggedin]);
-
   return (
     <div className="App">
-      <UserContext.Provider
+      {/* <UserContext.Provider
         value={{
           isLoggedin: isLoggedin,
           setIsLoggedin: setIsLoggedin,
           currentUser: currentUser,
           setCurrentUser: setCurrentUser,
-        }}>
+        }}> */}
+      <UserContextProvider>
         <BrowserRouter>
           <Header />
           <Routes>
@@ -63,7 +43,8 @@ function App() {
           </Routes>
           <Footer />
         </BrowserRouter>
-      </UserContext.Provider>
+      </UserContextProvider>
+      {/* </UserContext.Provider> */}
     </div>
   );
 }

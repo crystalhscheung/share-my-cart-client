@@ -6,7 +6,7 @@ import { UserContext } from "../../context/UserContext";
 import "./UploadItemPage.scss";
 
 export default function UploadItemPage() {
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
   const submitHandler = (e, itemInfo, itemImage) => {
     e.preventDefault();
@@ -34,6 +34,7 @@ export default function UploadItemPage() {
       console.log(data.newItemId);
     };
     uploadItem();
+    setCurrentUser();
     navigate(`/user/${currentUser.id}`);
   };
 

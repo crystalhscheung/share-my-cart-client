@@ -40,6 +40,7 @@ export default function EditProfilePage() {
       );
     };
     updateProfile();
+    setCurrentUser();
 
     navigate(`/user/${currentUser.id}`);
   };
