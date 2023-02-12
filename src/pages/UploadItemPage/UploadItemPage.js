@@ -32,9 +32,9 @@ export default function UploadItemPage() {
         }
       );
       console.log(data.newItemId);
+      setCurrentUser();
     };
     uploadItem();
-    setCurrentUser();
     navigate(`/user/${currentUser.id}`);
   };
 

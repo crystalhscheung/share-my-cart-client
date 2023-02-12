@@ -38,9 +38,21 @@ export default function EditProfilePage() {
           },
         }
       );
+      // const getUserWithToken = async () => {
+      //   const { data } = await axios.get(
+      //     "http://localhost:8080/user/autologin",
+      //     {
+      //       headers: {
+      //         Authorization: `Bearer ${token}`,
+      //       },
+      //     }
+      //   );
+      //   setCurrentUser(data.user);
+      // };
+      // getUserWithToken();
+      setCurrentUser();
     };
     updateProfile();
-    setCurrentUser();
 
     navigate(`/user/${currentUser.id}`);
   };
