@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import "./EditProfilePage.scss";
@@ -8,36 +8,64 @@ export default function EditProfilePage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [avatar, setAvatar] = useState(null);
+  const [bio, setBio] = useState("");
+
+  useEffect(() => {
+    if (!currentUser) {
+      return;
+    }
+    setBio(currentUser.bio);
+  }, [currentUser]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(e.target.avatar.value);
 
     const formData = new FormData();
-    formData.append("avatar", avatar);
+    if (avatar) {
+      formData.append("avatar", avatar);
+    }
+    formData.append("bio", bio);
 
-    const updateAvatar = async () => {
+    const updateProfile = async () => {
+      const token = sessionStorage.getItem("JWTtoken");
+
       await axios.patch(
         `http://localhost:8080/user/edit/${currentUser.id}`,
-        formData
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
     };
-    updateAvatar();
+    updateProfile();
 
     navigate(`/user/${currentUser.id}`);
   };
 
   return (
     <main className="editprofile">
-      <h2 className="editprofile-title">Edit your avatar</h2>
+      <h2 className="editprofile-title">Edit your profile</h2>
       <form onSubmit={submitHandler} className="editprofile-form">
-        <input
-          className="editprofile-form__input"
-          type="file"
-          name="avatar"
-          accept="images/*"
-          onChange={(e) => setAvatar(e.target.files[0])}
-        />
+        <label className="editprofile-form__label">
+          Avatar
+          <input
+            className="editprofile-form__input"
+            type="file"
+            name="avatar"
+            accept="images/*"
+            onChange={(e) => setAvatar(e.target.files[0])}
+          />
+        </label>
+        <label className="editprofile-form__label">
+          Bio
+          <textarea
+            className="editprofile-form__input editprofile-form__input--bio"
+            name="bio"
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}></textarea>
+        </label>
         <button className="editprofile-form__btn" type="submit">
           Update
         </button>

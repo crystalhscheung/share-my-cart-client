@@ -11,7 +11,6 @@ export default function EditItemPage() {
   useEffect(() => {
     const getItem = async () => {
       const { data } = await axios.get(`http://localhost:8080/items/${itemId}`);
-      console.log(data);
       setCurrentItem(data);
     };
     getItem();
@@ -19,7 +18,6 @@ export default function EditItemPage() {
 
   const editItemHandler = (e, itemInfo, itemImage) => {
     e.preventDefault();
-    console.log(itemInfo, itemImage);
     const token = sessionStorage.getItem("JWTtoken");
 
     const formData = new FormData();

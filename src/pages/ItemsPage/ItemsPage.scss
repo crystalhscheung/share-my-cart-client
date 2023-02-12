@@ -1,0 +1,22 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.itemsPage {
+  padding: 1.6rem;
+  display: flex;
+  gap: 3.6rem;
+  min-height: 75vh;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  @include tablet-up {
+    padding: 2.4rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+  }
+
+  @include desktop-up {
+    padding: 3.6rem;
+  }
+}

@@ -14,7 +14,6 @@ export default function ShoppingCartPage() {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(data);
     setCart(data);
   };
 
@@ -37,7 +36,7 @@ export default function ShoppingCartPage() {
   return (
     <main className="cart">
       <h2 className="cart-title">In Your Cart</h2>
-      {!cart && <h3>Nothing is in your cart now</h3>}
+      {!cart && <h3 className="cart-noItemMsg">Nothing is in your cart now</h3>}
       {cart &&
         cart.map((item) => {
           return (
@@ -49,10 +48,12 @@ export default function ShoppingCartPage() {
             />
           );
         })}
-      <div className="cart-total">
-        <span className="cart-total__amount">{`Total: $${total}`}</span>
-        <button className="cart-total__btn">Check Out</button>
-      </div>
+      {cart && (
+        <div className="cart-total">
+          <span className="cart-total__amount">{`Total: $${total}`}</span>
+          <button className="cart-total__btn">Check Out</button>
+        </div>
+      )}
     </main>
   );
 }

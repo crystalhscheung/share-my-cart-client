@@ -18,7 +18,7 @@ export default function UserProfilePage() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(data);
+      // console.log(data);
       setIsThatUser(data.isThatUser);
       setUser(data.user);
     };
@@ -47,7 +47,7 @@ export default function UserProfilePage() {
         <h2 className="profile-data__name">{user && user.username}</h2>
         {isThatUser && (
           <Link to={`/user/edit/${user.id}`} className="profile-data__edit">
-            Edit Avatar
+            Edit Profile
           </Link>
         )}
         {isThatUser && (
@@ -55,6 +55,7 @@ export default function UserProfilePage() {
             Upload Item
           </Link>
         )}
+        {user && <p className="profile-data__bio">{`Bio: ${user.bio}`}</p>}
       </div>
       {user && (
         <div className="profile-items">

@@ -2,9 +2,20 @@
 @use "../../styles/partials/mixins" as *;
 
 .profile {
+  width: 100%;
+  min-height: 70vh;
   padding: 1.6rem;
   display: flex;
+  flex-direction: column;
   gap: 2.4rem;
+  max-width: 110rem;
+  margin: auto;
+
+  @include tablet-up {
+    padding: 2.4rem;
+    flex-direction: row;
+    gap: 5.6rem;
+  }
 
   &-data {
     display: flex;
@@ -12,6 +23,10 @@
     justify-content: flex-start;
     align-items: center;
     gap: 1rem;
+
+    @include tablet-up {
+      width: 40%;
+    }
 
     &__edit,
     &__upload {
@@ -25,12 +40,25 @@
       width: 10rem;
       object-fit: cover;
       border-radius: 50%;
+
+      @include tablet-up {
+        height: 18rem;
+        width: 18rem;
+      }
     }
   }
 
   &-items {
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1.6rem;
+
+    @include tablet-up {
+      // width: 60%;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
   }
 }

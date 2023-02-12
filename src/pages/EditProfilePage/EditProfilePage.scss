@@ -2,17 +2,48 @@
 @use "../../styles/partials/mixins" as *;
 
 .editprofile {
-  height: 60vh;
   padding: 1.6rem;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  min-height: 70vh;
+  max-width: 120rem;
+  margin: auto;
+
+  @include tablet-up {
+    padding: 2.4rem;
+  }
+
+  @include desktop-up {
+    padding: 3.6rem;
+  }
 
   &-form {
     display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    width: 100%;
+    max-width: 40rem;
+    margin: 0 auto;
+
+    &__label {
+      display: flex;
+      flex-direction: column;
+    }
 
     &__input {
-      border: 1px $darkgreen-font soli;
+      border: 1px $lightgreen-background solid;
+      height: 5rem;
+      border-radius: 0.4rem;
+      padding: 1.6rem;
+
+      &:focus {
+        border-color: $forestgreen-background;
+      }
+
+      &--bio {
+        height: 20rem;
+      }
     }
 
     &__btn {
@@ -24,6 +55,7 @@
       width: fit-content;
       @include flex-center;
       border: none;
+      align-self: flex-end;
 
       &:hover {
         background-color: $darkgreen-font;

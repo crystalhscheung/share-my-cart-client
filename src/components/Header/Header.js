@@ -14,6 +14,9 @@ export default function Header() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!e.target.search.value) {
+      return;
+    }
     navigate(`/items/?search=${e.target.search.value}`);
     e.target.reset();
   };

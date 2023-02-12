@@ -16,17 +16,13 @@ export default function ItemDetail() {
     }
     const getItem = async () => {
       const { data } = await axios.get(`http://localhost:8080/items/${itemId}`);
-      console.log(data);
       setItem(data);
     };
     getItem();
   }, [itemId]);
 
   useEffect(() => {
-    if (!currentUser) {
-      return;
-    }
-    if (!item) {
+    if (!currentUser || !item) {
       return;
     }
     if (currentUser.id === item.user_id) {
@@ -109,7 +105,7 @@ export default function ItemDetail() {
               to={currentUser ? "/user/cart" : "/login"}
               onClick={addToCartHandler}
               className="detail-info-btn detail-info-btn__add">
-              +Cart
+              Add to Cart
             </Link>
           )}
           {!isThatUser && (

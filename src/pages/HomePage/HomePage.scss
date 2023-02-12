@@ -1,8 +1,194 @@
 @use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
 .main {
-  height: 30rem;
-  background-color: $cream-background;
-  //   #fffbef;
-  //   #fffde3;
-  //   #fcfcee;
+  padding: 1.6rem;
+
+  @include tablet-up {
+    padding: 2.4rem;
+  }
+
+  @include desktop-up {
+    padding: 3.6rem;
+  }
+}
+
+.carousel {
+  @include tablet-up {
+    padding: 0 3%;
+    margin-bottom: 2.4rem;
+  }
+
+  &-title {
+    font-size: 2.8rem;
+    margin-bottom: 1.6rem;
+  }
+}
+
+.discount {
+  @include flex-center;
+  height: 15rem;
+  width: 100%;
+
+  &__banner {
+    height: 60%;
+    width: 100%;
+    background-color: $forestgreen-background;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    border-radius: 1rem;
+    @include flex-center;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 2rem;
+
+    &:hover {
+      background-color: $darkgreen-font;
+      cursor: pointer;
+    }
+
+    @include tablet-up {
+      font-size: 3.5rem;
+      width: 90%;
+    }
+  }
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  justify-content: center;
+
+  @include tablet-up {
+    gap: 7rem;
+    padding: 2.4rem 0;
+  }
+}
+
+.category {
+  height: 10rem;
+  width: 100%;
+  @include flex-center;
+  font-size: 3.6rem;
+  text-align: center;
+  border-radius: 1rem;
+  font-weight: 600;
+  color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+
+  @include tablet-up {
+    height: 27rem;
+    width: 27rem;
+    font-size: 4.5rem;
+  }
+
+  &--household {
+    background-image: linear-gradient(
+        rgba(80, 80, 80, 0.5),
+        rgba(80, 80, 80, 0.5)
+      ),
+      url("../../assets/images/household.jpeg");
+
+    &:hover {
+      background-image: linear-gradient(
+          rgba(10, 10, 10, 0.5),
+          rgba(10, 10, 10, 0.5)
+        ),
+        url("../../assets/images/household.jpeg");
+    }
+  }
+
+  &--grocery {
+    background-image: linear-gradient(
+        rgba(50, 50, 50, 0.5),
+        rgba(50, 50, 50, 0.5)
+      ),
+      url("../../assets/images/grocery.png");
+
+    &:hover {
+      background-image: linear-gradient(
+          rgba(10, 10, 10, 0.5),
+          rgba(10, 10, 10, 0.5)
+        ),
+        url("../../assets/images/grocery.png");
+    }
+  }
+
+  &--apparel {
+    background-image: linear-gradient(
+        rgba(50, 50, 50, 0.5),
+        rgba(50, 50, 50, 0.5)
+      ),
+      url("../../assets/images/apparel.png");
+
+    &:hover {
+      background-image: linear-gradient(
+          rgba(10, 10, 10, 0.5),
+          rgba(10, 10, 10, 0.5)
+        ),
+        url("../../assets/images/apparel.png");
+    }
+  }
+
+  &--personal-care {
+    background-image: linear-gradient(
+        rgba(50, 50, 50, 0.5),
+        rgba(50, 50, 50, 0.5)
+      ),
+      url("../../assets/images/personal_care.png");
+
+    &:hover {
+      background-image: linear-gradient(
+          rgba(10, 10, 10, 0.5),
+          rgba(10, 10, 10, 0.5)
+        ),
+        url("../../assets/images/personal_care.png");
+    }
+  }
+
+  &--electronics {
+    background-image: linear-gradient(
+        rgba(50, 50, 50, 0.5),
+        rgba(50, 50, 50, 0.5)
+      ),
+      url("../../assets/images/electronics.png");
+
+    &:hover {
+      background-image: linear-gradient(
+          rgba(10, 10, 10, 0.5),
+          rgba(10, 10, 10, 0.5)
+        ),
+        url("../../assets/images/electronics.png");
+    }
+  }
+
+  &--books {
+    background-image: linear-gradient(
+        rgba(50, 50, 50, 0.5),
+        rgba(50, 50, 50, 0.5)
+      ),
+      url("../../assets/images/books.jpeg");
+
+    &:hover {
+      background-image: linear-gradient(
+          rgba(10, 10, 10, 0.5),
+          rgba(10, 10, 10, 0.5)
+        ),
+        url("../../assets/images/books.jpeg");
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

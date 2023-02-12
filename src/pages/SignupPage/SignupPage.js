@@ -102,6 +102,7 @@ export default function SignUpPage() {
           Sign up
         </button>
       </form>
+      <span className="signup-or">OR</span>
       <div id="signInDiv"></div>
     </main>
   );

@@ -3,11 +3,33 @@
 
 .detail {
   display: flex;
+  flex-direction: column;
   padding: 1.6rem;
   gap: 1.6rem;
+  min-height: 70vh;
+  max-width: 120rem;
+  margin: auto;
+
+  @include tablet-up {
+    flex-direction: row;
+    padding: 2.4rem;
+    gap: 3.6rem;
+  }
+
+  @include desktop-up {
+    padding: 3.6rem;
+    gap: 3.6rem;
+  }
 
   &-img {
-    width: 30rem;
+    width: 100%;
+    max-width: 50rem;
+
+    &-wrapper {
+      @include tablet-up {
+        width: 50%;
+      }
+    }
   }
 
   &-info {
@@ -29,6 +51,7 @@
       width: fit-content;
       @include flex-center;
       border: none;
+      font-size: 1.6rem;
 
       &:hover {
         background-color: $darkgreen-font;

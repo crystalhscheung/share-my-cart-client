@@ -90,6 +90,7 @@ export default function LoginPage() {
           Log in
         </button>
       </form>
+      <span className="login-or">OR</span>
       <div id="signInDiv"></div>
     </main>
   );

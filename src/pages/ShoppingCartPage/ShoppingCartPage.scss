@@ -3,6 +3,23 @@
 
 .cart {
   padding: 1.6rem;
+  min-height: 75vh;
+
+  @include tablet-up {
+    padding: 2.4rem;
+  }
+
+  @include desktop-up {
+    padding: 2.4rem 3.6rem;
+  }
+
+  &-noItemMsg {
+    padding: 1.6rem 0;
+
+    @include tablet-up {
+      padding: 2.4rem 0;
+    }
+  }
 
   &-total {
     border-top: 1px solid $darkgreen-font;

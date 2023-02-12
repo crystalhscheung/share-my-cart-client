@@ -39,7 +39,7 @@ export default function UploadItemPage() {
 
   return (
     <main className="upload">
-      <h1 className="upload-title">Upload an item to share</h1>
+      <h1 className="upload-title">Upload Item</h1>
       <ItemForm submitHandler={submitHandler} buttonTxt="Upload" />
     </main>
   );

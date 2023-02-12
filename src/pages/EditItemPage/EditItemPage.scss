@@ -1,3 +1,21 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
 .editItem {
   padding: 1.6rem;
+  max-width: 128rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  @include tablet-up {
+    padding: 2.4rem;
+    gap: 2.4rem;
+  }
+
+  @include desktop-up {
+    padding: 3.6rem;
+    gap: 3.6rem;
+  }
 }

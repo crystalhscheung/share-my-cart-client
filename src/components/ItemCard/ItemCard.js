@@ -17,7 +17,7 @@ export default function ItemCard({ item }) {
   }, [currentUser]);
 
   const deleteHandler = (e) => {
-    const deleteItem = async (e) => {
+    const deleteItem = async () => {
       console.log("In delete handler");
       const token = sessionStorage.getItem("JWTtoken");
 
@@ -55,7 +55,8 @@ export default function ItemCard({ item }) {
   };
 
   return (
-    <Link to={`/items/${item.id}`} className="itemCard">
+    <div className="itemCard">
+      <Link to={`/items/${item.id}`} className="itemCard-link"></Link>
       <div className="itemCard-imgs">
         <img
           className="itemCard-img"
@@ -64,7 +65,7 @@ export default function ItemCard({ item }) {
       </div>
       <div className="itemCard-info">
         <h3 className="itemCard-info__name">{item.item_name}</h3>
-        <Link to={`/user/${item.user_id}`}>
+        <Link to={`/user/${item.user_id}`} className="itemCard-info__user">
           <span className="itemCard-info__user">{`From ${item.username}`}</span>
         </Link>
         <span className="itemCard-info__quantity">{`Quantity: ${item.quantity}`}</span>
@@ -98,6 +99,6 @@ export default function ItemCard({ item }) {
           </Link>
         )}
       </div>
-    </Link>
+    </div>
   );
 }

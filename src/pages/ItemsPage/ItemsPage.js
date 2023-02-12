@@ -6,21 +6,40 @@ import "./ItemsPage.scss";
 
 export default function ItemsPage() {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get("search");
+  const searchQuery = searchParams.get("search");
+  const categoryQuery = searchParams.get("category");
+
   const [itemList, setItemList] = useState(null);
 
   useEffect(() => {
+    if (!searchQuery) {
+      return;
+    }
     const getList = async () => {
       const { data } = await axios.get(
-        `http://localhost:8080/items/?search=${query}`
+        `http://localhost:8080/items/?search=${searchQuery}`
       );
       setItemList(data);
     };
     getList();
-  }, [query]);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (!categoryQuery) {
+      return;
+    }
+    console.log(categoryQuery);
+    const getList = async () => {
+      const { data } = await axios.get(
+        `http://localhost:8080/items/?category=${categoryQuery}`
+      );
+      setItemList(data);
+    };
+    getList();
+  }, [categoryQuery]);
 
   return (
-    <main>
+    <main className="itemsPage">
       {itemList &&
         itemList.map((item) => {
           return <ItemCard key={item.id} item={item} />;
