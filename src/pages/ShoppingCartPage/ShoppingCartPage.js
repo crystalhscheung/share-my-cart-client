@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ItemInCart from "../../components/ItemInCart/ItemInCart";
 import "./ShoppingCartPage.scss";
 
@@ -51,7 +52,9 @@ export default function ShoppingCartPage() {
       {cart && (
         <div className="cart-total">
           <span className="cart-total__amount">{`Total: $${total}`}</span>
-          <button className="cart-total__btn">Check Out</button>
+          <Link to={"/checkout"} className="cart-total__btn">
+            Check Out
+          </Link>
         </div>
       )}
     </main>

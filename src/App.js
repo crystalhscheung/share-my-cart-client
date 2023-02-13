@@ -15,6 +15,8 @@ import axios from "axios";
 import EditProfilePage from "./pages/EditProfilePage/EditProfilePage";
 import EditItemPage from "./pages/EditItemPage/EditItemPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage/ShoppingCartPage";
+import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import CompletePaymentPage from "./pages/CompletePaymentPage/CompletePayment";
 
 function App() {
   const [isLoggedin, setIsLoggedin] = useState(
@@ -60,6 +62,8 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/upload" element={<UploadItemPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/completion" element={<CompletePaymentPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>

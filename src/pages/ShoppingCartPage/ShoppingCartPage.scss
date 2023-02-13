@@ -31,14 +31,15 @@
     font-size: 2.3rem;
 
     &__btn {
-      font-size: 2rem;
-      background-color: #267537;
+      font-size: 1.8rem;
+      background-color: $forestgreen-background;
       border: none;
       color: white;
       height: 4rem;
       border-radius: 2rem;
       padding: 0 1.6rem;
       font-family: "NunitoSans";
+      @include flex-center;
 
       &:hover {
         cursor: pointer;

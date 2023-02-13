@@ -1,0 +1,43 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.checkout {
+  width: 100%;
+  min-height: 75vh;
+  padding: 1.6rem;
+  @include tablet-up {
+    padding: 2.4rem;
+  }
+
+  @include desktop-up {
+    padding: 2.4rem 3.6rem;
+  }
+}
+
+.payment {
+  &__form {
+    width: 100%;
+    max-width: 70rem;
+    margin: auto;
+    margin-top: 1.6rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__btn {
+    margin-top: 2rem;
+    width: 100%;
+    background-color: $forestgreen-background;
+    color: white;
+    border: none;
+    height: 4rem;
+    border-radius: 0.4rem;
+    font-family: "NunitoSans";
+    font-size: 1.8rem;
+
+    @include tablet-up {
+      width: 15rem;
+      align-self: flex-end;
+    }
+  }
+}

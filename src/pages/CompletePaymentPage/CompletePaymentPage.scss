@@ -1,0 +1,15 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.completepayment {
+  min-height: 75vh;
+  padding: 1.6rem;
+
+  @include tablet-up {
+    padding: 2.4rem;
+  }
+
+  @include desktop-up {
+    padding: 3.6rem;
+  }
+}
