@@ -6,9 +6,9 @@ import "./ItemDetail.scss";
 
 export default function ItemDetail() {
   const [item, setItem] = useState(null);
+  const [isThatUser, setIsThatUser] = useState(false);
   const { itemId } = useParams();
   const { currentUser } = useContext(UserContext);
-  const [isThatUser, setIsThatUser] = useState(false);
 
   useEffect(() => {
     if (!itemId) {
@@ -32,7 +32,6 @@ export default function ItemDetail() {
 
   const deleteHandler = (e) => {
     const deleteItem = async (e) => {
-      console.log("In delete handler");
       const token = sessionStorage.getItem("JWTtoken");
 
       const { data } = await axios.delete(
@@ -43,7 +42,7 @@ export default function ItemDetail() {
           },
         }
       );
-      console.log(data);
+      // console.log(data);
     };
     deleteItem();
   };
