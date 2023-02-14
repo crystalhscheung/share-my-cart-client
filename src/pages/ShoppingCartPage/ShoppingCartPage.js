@@ -7,7 +7,7 @@ import "./ShoppingCartPage.scss";
 export default function ShoppingCartPage() {
   const [cart, setCart] = useState(null);
   const [total, setTotal] = useState(0);
-  const url = process.env.REACT_APP_API;
+  const url = process.env.REACT_APP_API_URL;
 
   const token = sessionStorage.getItem("JWTtoken");
   const getCart = async () => {

@@ -8,7 +8,7 @@ import "./CheckoutPage.scss";
 export default function CheckoutPage() {
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
-  const url = process.env.REACT_APP_API;
+  const url = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     axios.get(`${url}/config`).then((res) => {

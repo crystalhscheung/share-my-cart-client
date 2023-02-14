@@ -13,7 +13,7 @@ function UserContextProvider(props) {
     !!sessionStorage.getItem("JWTtoken")
   );
   const [currentUser, setCurrentUser] = useState(null);
-  const url = process.env.REACT_APP_API;
+  const url = process.env.REACT_APP_API_URL;
 
   const getUserWithToken = async () => {
     try {

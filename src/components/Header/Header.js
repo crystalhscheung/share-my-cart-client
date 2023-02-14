@@ -10,7 +10,7 @@ export default function Header() {
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState("");
   const { currentUser, setIsLoggedin, isLoggedin } = useContext(UserContext);
-  const url = process.env.REACT_APP_API;
+  const url = process.env.REACT_APP_API_URL;
 
   const submitSearchHandler = (e) => {
     e.preventDefault();

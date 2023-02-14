@@ -7,7 +7,7 @@ export default function ItemInCart({ item, getCart }) {
     item.quantity_required
   );
   const [itemTotal, setItemTotal] = useState(quantityRequired * item.price);
-  const url = process.env.REACT_APP_API;
+  const url = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const changeItemQuantity = async () => {

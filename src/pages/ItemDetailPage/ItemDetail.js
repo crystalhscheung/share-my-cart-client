@@ -9,7 +9,8 @@ export default function ItemDetail() {
   const [isThatUser, setIsThatUser] = useState(false);
   const { itemId } = useParams();
   const { currentUser } = useContext(UserContext);
-  const url = process.env.REACT_APP_API;
+  const url = process.env.REACT_APP_API_URL;
+  console.log(url);
 
   useEffect(() => {
     if (!itemId) {

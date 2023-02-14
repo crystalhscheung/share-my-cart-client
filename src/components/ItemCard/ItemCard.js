@@ -7,7 +7,7 @@ import "./ItemCard.scss";
 export default function ItemCard({ item }) {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [isThatUser, setIsThatUser] = useState(false);
-  const url = process.env.REACT_APP_API;
+  const url = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     if (!currentUser) {
