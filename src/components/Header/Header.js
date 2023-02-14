@@ -42,7 +42,7 @@ export default function Header() {
   return (
     <header className="header">
       <Link to="/">
-        <h1 className="header__title">Share My Chart</h1>
+        <h1 className="header__title">Share My Cart</h1>
       </Link>
       <nav className="nav">
         <form className="nav-searchbar" onSubmit={submitSearchHandler}>
