@@ -11,19 +11,17 @@ export default function UserProfilePage() {
   const [avatar, setAvatar] = useState("");
   const { userId } = useParams();
   const { currentUser } = useContext(UserContext);
+  const url = process.env.BASE_API_URL;
 
   useEffect(() => {
     const getProfile = async () => {
       try {
         const token = sessionStorage.getItem("JWTtoken");
-        const { data } = await axios.get(
-          `http://localhost:8080/user/${userId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const { data } = await axios.get(`${url}/user/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setIsThatUser(data.isThatUser);
         setViewUser(data.user);
       } catch (error) {
@@ -38,11 +36,11 @@ export default function UserProfilePage() {
       return;
     }
     if (!viewUser.avatar) {
-      setAvatar("http://localhost:8080/avatars/avatar_placeholder.jpeg");
+      setAvatar(`${url}/avatars/avatar_placeholder.jpeg`);
     } else if (viewUser.avatar.slice(0, 5) === "https") {
       setAvatar(viewUser.avatar);
     } else if (viewUser.avatar) {
-      setAvatar(`http://localhost:8080/avatars/${viewUser.avatar}`);
+      setAvatar(`${url}/avatars/${viewUser.avatar}`);
     }
   }, [viewUser]);
 

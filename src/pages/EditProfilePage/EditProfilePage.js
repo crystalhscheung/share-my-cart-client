@@ -9,6 +9,7 @@ export default function EditProfilePage() {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [avatar, setAvatar] = useState(null);
   const [bio, setBio] = useState("");
+  const url = process.env.BASE_API_URL;
 
   useEffect(() => {
     if (!currentUser) {
@@ -29,15 +30,11 @@ export default function EditProfilePage() {
     const updateProfile = async () => {
       try {
         const token = sessionStorage.getItem("JWTtoken");
-        await axios.patch(
-          `http://localhost:8080/user/edit/${currentUser.id}`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        await axios.patch(`${url}/user/edit/${currentUser.id}`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setCurrentUser();
       } catch (error) {
         console.log(error);

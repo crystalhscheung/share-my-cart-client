@@ -13,11 +13,12 @@ function UserContextProvider(props) {
     !!sessionStorage.getItem("JWTtoken")
   );
   const [currentUser, setCurrentUser] = useState(null);
+  const url = process.env.BASE_API_URL;
 
   const getUserWithToken = async () => {
     try {
       const token = sessionStorage.getItem("JWTtoken");
-      const { data } = await axios.get("http://localhost:8080/user/autologin", {
+      const { data } = await axios.get(`${url}/user/autologin`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

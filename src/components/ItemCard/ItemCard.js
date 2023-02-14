@@ -7,6 +7,8 @@ import "./ItemCard.scss";
 export default function ItemCard({ item }) {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [isThatUser, setIsThatUser] = useState(false);
+  const url = process.env.BASE_API_URL;
+
   useEffect(() => {
     if (!currentUser) {
       return;
@@ -20,7 +22,7 @@ export default function ItemCard({ item }) {
     const deleteItem = async (e) => {
       try {
         const token = sessionStorage.getItem("JWTtoken");
-        await axios.delete(`http://localhost:8080/items/${item.id}`, {
+        await axios.delete(`${url}/items/${item.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -41,7 +43,7 @@ export default function ItemCard({ item }) {
     const addItemToCart = async () => {
       try {
         await axios.post(
-          `http://localhost:8080/cart/${item.id}`,
+          `${url}/cart/${item.id}`,
           {},
           {
             headers: {
@@ -63,7 +65,7 @@ export default function ItemCard({ item }) {
         <img
           className="itemCard-img"
           alt={item.name}
-          src={`http://localhost:8080/images/${item.images}`}
+          src={`${url}/images/${item.images}`}
         />
       </div>
       <div className="itemCard-info">

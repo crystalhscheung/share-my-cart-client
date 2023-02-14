@@ -8,22 +8,21 @@ import "./CheckoutPage.scss";
 export default function CheckoutPage() {
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
+  const url = process.env.BASE_API_URL;
 
   useEffect(() => {
-    axios.get("http://localhost:8080/config").then((res) => {
+    axios.get(`${url}/config`).then((res) => {
       const { publishableKey } = res.data;
       setStripePromise(loadStripe(publishableKey));
     });
   }, []);
 
   useEffect(() => {
-    axios
-      .post("http://localhost:8080/create-payment-intent", {})
-      .then((res) => {
-        const { clientSecret } = res.data;
-        console.log(clientSecret);
-        setClientSecret(clientSecret);
-      });
+    axios.post(`${url}/create-payment-intent`, {}).then((res) => {
+      const { clientSecret } = res.data;
+      console.log(clientSecret);
+      setClientSecret(clientSecret);
+    });
   }, []);
 
   return (

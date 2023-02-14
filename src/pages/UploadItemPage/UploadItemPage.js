@@ -8,6 +8,7 @@ import "./UploadItemPage.scss";
 export default function UploadItemPage() {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const url = process.env.BASE_API_URL;
   const submitHandler = (e, itemInfo, itemImage) => {
     e.preventDefault();
 
@@ -22,7 +23,7 @@ export default function UploadItemPage() {
     const uploadItem = async () => {
       try {
         const token = sessionStorage.getItem("JWTtoken");
-        await axios.post("http://localhost:8080/items/upload", formData, {
+        await axios.post(`${url}/items/upload`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

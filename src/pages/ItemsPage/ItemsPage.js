@@ -8,6 +8,7 @@ export default function ItemsPage() {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("search");
   const categoryQuery = searchParams.get("category");
+  const url = process.env.BASE_API_URL;
 
   const [itemList, setItemList] = useState(null);
 
@@ -17,9 +18,7 @@ export default function ItemsPage() {
     }
     const getList = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:8080/items/?search=${searchQuery}`
-        );
+        const { data } = await axios.get(`${url}/items/?search=${searchQuery}`);
         setItemList(data);
       } catch (error) {
         console.log(error);
@@ -36,7 +35,7 @@ export default function ItemsPage() {
     const getList = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:8080/items/?category=${categoryQuery}`
+          `${url}/items/?category=${categoryQuery}`
         );
         setItemList(data);
       } catch (error) {

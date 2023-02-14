@@ -9,6 +9,7 @@ export default function ItemDetail() {
   const [isThatUser, setIsThatUser] = useState(false);
   const { itemId } = useParams();
   const { currentUser } = useContext(UserContext);
+  const url = process.env.BASE_API_URL;
 
   useEffect(() => {
     if (!itemId) {
@@ -16,9 +17,7 @@ export default function ItemDetail() {
     }
     const getItem = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:8080/items/${itemId}`
-        );
+        const { data } = await axios.get(`${url}/items/${itemId}`);
         setItem(data);
       } catch (error) {
         console.log(error);
@@ -41,7 +40,7 @@ export default function ItemDetail() {
       try {
         const token = sessionStorage.getItem("JWTtoken");
 
-        await axios.delete(`http://localhost:8080/items/${item.id}`, {
+        await axios.delete(`${url}/items/${item.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -61,7 +60,7 @@ export default function ItemDetail() {
     const addItemToCart = async () => {
       try {
         await axios.post(
-          `http://localhost:8080/cart/${item.id}`,
+          `${url}/cart/${item.id}`,
           {},
           {
             headers: {
@@ -80,7 +79,7 @@ export default function ItemDetail() {
     <main className="detail">
       <div className="detail-img__wrapper">
         <img
-          src={`http://localhost:8080/images/${item && item.images}`}
+          src={`${url}/images/${item && item.images}`}
           alt={item && item.images}
           className="detail-img"
         />

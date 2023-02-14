@@ -7,13 +7,14 @@ export default function ItemInCart({ item, getCart }) {
     item.quantity_required
   );
   const [itemTotal, setItemTotal] = useState(quantityRequired * item.price);
+  const url = process.env.BASE_API_URL;
 
   useEffect(() => {
     const changeItemQuantity = async () => {
       try {
         const token = sessionStorage.getItem("JWTtoken");
         await axios.put(
-          `http://localhost:8080/cart/${item.item_id}`,
+          `${url}/cart/${item.item_id}`,
           { new_quantity_required: quantityRequired },
           {
             headers: {
@@ -34,7 +35,7 @@ export default function ItemInCart({ item, getCart }) {
     const removeItemFromCart = async () => {
       try {
         const token = sessionStorage.getItem("JWTtoken");
-        await axios.delete(`http://localhost:8080/cart/${item.item_id}`, {
+        await axios.delete(`${url}/cart/${item.item_id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -54,7 +55,7 @@ export default function ItemInCart({ item, getCart }) {
           <img
             className="itemCart-img"
             alt={item.name}
-            src={`http://localhost:8080/images/${item.images}`}
+            src={`${url}/images/${item.images}`}
           />
         </div>
         <div className="itemCart-info">

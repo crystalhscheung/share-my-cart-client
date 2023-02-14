@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 export default function Carousel() {
   const { scrollRef } = useSnapCarousel();
   const [itemImages, setItemImages] = useState(null);
+  const url = process.env.BASE_API_URL;
+  console.log(url);
 
   useEffect(() => {
     const getAllItemImages = async () => {
       try {
-        const { data } = await axios.get("http://localhost:8080/items/images");
+        const { data } = await axios.get(`${url}/items/images`);
         setItemImages(data);
       } catch (error) {
         console.log(error);

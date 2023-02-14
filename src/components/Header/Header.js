@@ -10,6 +10,7 @@ export default function Header() {
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState("");
   const { currentUser, setIsLoggedin, isLoggedin } = useContext(UserContext);
+  const url = process.env.BASE_API_URL;
 
   const submitSearchHandler = (e) => {
     e.preventDefault();
@@ -30,11 +31,11 @@ export default function Header() {
       return;
     }
     if (!currentUser.avatar) {
-      setAvatar("http://localhost:8080/avatars/avatar_placeholder.jpeg");
+      setAvatar(`${url}/avatars/avatar_placeholder.jpeg`);
     } else if (currentUser.avatar.slice(0, 5) === "https") {
       setAvatar(currentUser.avatar);
     } else if (currentUser.avatar) {
-      setAvatar(`http://localhost:8080/avatars/${currentUser.avatar}`);
+      setAvatar(`${url}/avatars/${currentUser.avatar}`);
     }
   }, [currentUser, isLoggedin]);
 

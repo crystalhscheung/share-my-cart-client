@@ -7,11 +7,12 @@ import "./ShoppingCartPage.scss";
 export default function ShoppingCartPage() {
   const [cart, setCart] = useState(null);
   const [total, setTotal] = useState(0);
+  const url = process.env.BASE_API_URL;
 
   const token = sessionStorage.getItem("JWTtoken");
   const getCart = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8080/cart/", {
+      const { data } = await axios.get(`${url}/cart/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

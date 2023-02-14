@@ -8,12 +8,11 @@ export default function EditItemPage() {
   const navigate = useNavigate();
   const [currentItem, setCurrentItem] = useState(null);
   const { itemId } = useParams();
+  const url = process.env.BASE_API_URL;
   useEffect(() => {
     const getItem = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:8080/items/${itemId}`
-        );
+        const { data } = await axios.get(`${url}/items/${itemId}`);
         setCurrentItem(data);
       } catch (error) {
         console.log(error);
@@ -32,15 +31,11 @@ export default function EditItemPage() {
     }
     const updateItem = async () => {
       try {
-        await axios.patch(
-          `http://localhost:8080/items/edit/${itemInfo.id}`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        await axios.patch(`${url}/items/edit/${itemInfo.id}`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         alert("Successfully updated item");
         navigate(`/user/${currentItem.user_id}`);
       } catch (error) {

@@ -8,6 +8,7 @@ import jwt_decode from "jwt-decode";
 export default function SignUpPage() {
   const { setIsLoggedin, isLoggedin, currentUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const url = process.env.BASE_API_URL;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ export default function SignUpPage() {
 
     const signup = async () => {
       try {
-        const { data } = await axios.post("http://localhost:8080/user/signup", {
+        const { data } = await axios.post(`${url}/user/signup`, {
           username,
           email,
           password,
@@ -45,10 +46,7 @@ export default function SignUpPage() {
 
     const loginWithGoogle = async () => {
       try {
-        const { data } = await axios.post(
-          "http://localhost:8080/user/google",
-          userFromGoogle
-        );
+        const { data } = await axios.post(`${url}/user/google`, userFromGoogle);
         sessionStorage.setItem("JWTtoken", data.token);
         setIsLoggedin(true);
         console.log(isLoggedin, currentUser);

@@ -9,6 +9,7 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setIsLoggedin } = useContext(UserContext);
+  const url = process.env.BASE_API_URL;
 
   const navigate = useNavigate();
 
@@ -16,7 +17,7 @@ export default function LoginPage() {
     e.preventDefault();
     const login = async () => {
       try {
-        const { data } = await axios.post("http://localhost:8080/user/login", {
+        const { data } = await axios.post(`${url}/user/login`, {
           username,
           password,
         });
@@ -42,10 +43,7 @@ export default function LoginPage() {
 
     const loginWithGoogle = async () => {
       try {
-        const { data } = await axios.post(
-          "http://localhost:8080/user/google",
-          userFromGoogle
-        );
+        const { data } = await axios.post(`${url}/user/google`, userFromGoogle);
         sessionStorage.setItem("JWTtoken", data.token);
         setIsLoggedin(true);
         navigate("/");
