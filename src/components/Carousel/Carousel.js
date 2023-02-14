@@ -7,7 +7,6 @@ export default function Carousel() {
   const { scrollRef } = useSnapCarousel();
   const [itemImages, setItemImages] = useState(null);
   const url = process.env.REACT_APP_API_URL;
-  console.log(url);
 
   useEffect(() => {
     const getAllItemImages = async () => {
@@ -35,7 +34,7 @@ export default function Carousel() {
             <li key={item.id}>
               <Link to={`/items/${item.id}`}>
                 <img
-                  src={`http://localhost:8080/images/${item.images}`}
+                  src={`${url}/images/${item.images}`}
                   style={{
                     objectFit: "scale-down",
                     height: "25rem",
