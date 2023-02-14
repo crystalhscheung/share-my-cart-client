@@ -16,10 +16,14 @@ export default function ItemsPage() {
       return;
     }
     const getList = async () => {
-      const { data } = await axios.get(
-        `http://localhost:8080/items/?search=${searchQuery}`
-      );
-      setItemList(data);
+      try {
+        const { data } = await axios.get(
+          `http://localhost:8080/items/?search=${searchQuery}`
+        );
+        setItemList(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getList();
   }, [searchQuery]);
@@ -30,10 +34,14 @@ export default function ItemsPage() {
     }
     console.log(categoryQuery);
     const getList = async () => {
-      const { data } = await axios.get(
-        `http://localhost:8080/items/?category=${categoryQuery}`
-      );
-      setItemList(data);
+      try {
+        const { data } = await axios.get(
+          `http://localhost:8080/items/?category=${categoryQuery}`
+        );
+        setItemList(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getList();
   }, [categoryQuery]);

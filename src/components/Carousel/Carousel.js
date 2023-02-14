@@ -9,8 +9,12 @@ export default function Carousel() {
 
   useEffect(() => {
     const getAllItemImages = async () => {
-      const { data } = await axios.get("http://localhost:8080/items/images");
-      setItemImages(data);
+      try {
+        const { data } = await axios.get("http://localhost:8080/items/images");
+        setItemImages(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getAllItemImages();
   }, []);
@@ -35,6 +39,7 @@ export default function Carousel() {
                     height: "25rem",
                     width: "25rem",
                   }}
+                  alt={item.name}
                 />
               </Link>
             </li>

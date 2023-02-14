@@ -8,28 +8,30 @@ import jwt_decode from "jwt-decode";
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { setIsLoggedin, isLoggedin, currentUser } = useContext(UserContext);
+  const { setIsLoggedin } = useContext(UserContext);
 
   const navigate = useNavigate();
 
   const submitHandler = (e) => {
     e.preventDefault();
     const login = async () => {
-      const { data } = await axios.post("http://localhost:8080/user/login", {
-        username,
-        password,
-      });
-      sessionStorage.setItem("JWTtoken", data.token);
-      setIsLoggedin(true);
-      navigate("/");
+      try {
+        const { data } = await axios.post("http://localhost:8080/user/login", {
+          username,
+          password,
+        });
+        sessionStorage.setItem("JWTtoken", data.token);
+        setIsLoggedin(true);
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
     };
     login();
   };
 
   const handleCallbackResponse = (res) => {
-    console.log("Encoded JWT ID token: " + res.credential);
     const googleUser = jwt_decode(res.credential);
-    console.log(googleUser);
 
     const userFromGoogle = {
       username: googleUser.given_name,
@@ -39,15 +41,17 @@ export default function LoginPage() {
     };
 
     const loginWithGoogle = async () => {
-      const { data } = await axios.post(
-        "http://localhost:8080/user/google",
-        userFromGoogle
-      );
-      // console.log(data);
-      sessionStorage.setItem("JWTtoken", data.token);
-      setIsLoggedin(true);
-      console.log(isLoggedin, currentUser);
-      navigate("/");
+      try {
+        const { data } = await axios.post(
+          "http://localhost:8080/user/google",
+          userFromGoogle
+        );
+        sessionStorage.setItem("JWTtoken", data.token);
+        setIsLoggedin(true);
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
     };
     loginWithGoogle();
   };

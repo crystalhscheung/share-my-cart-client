@@ -9,8 +9,7 @@ import { UserContext } from "../../context/UserContext";
 export default function Header() {
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState("");
-  const { currentUser, isLoggedin, setCurrentUser, setIsLoggedin } =
-    useContext(UserContext);
+  const { currentUser, setIsLoggedin, isLoggedin } = useContext(UserContext);
 
   const submitSearchHandler = (e) => {
     e.preventDefault();
@@ -37,7 +36,7 @@ export default function Header() {
     } else if (currentUser.avatar) {
       setAvatar(`http://localhost:8080/avatars/${currentUser.avatar}`);
     }
-  }, [currentUser]);
+  }, [currentUser, isLoggedin]);
 
   return (
     <header className="header">
@@ -52,14 +51,14 @@ export default function Header() {
           </button>
         </form>
         <div className="nav-acc">
-          {!currentUser && (
+          {!isLoggedin && (
             <img
               src={accountIcon}
               className="nav-acc__icon icon"
               alt="account icon"
             />
           )}
-          {currentUser && (
+          {currentUser && isLoggedin && (
             <img
               src={avatar}
               className="nav-acc__avatar icon"
@@ -67,12 +66,12 @@ export default function Header() {
             />
           )}
           <div className="nav-acc__dropdown">
-            {!currentUser && (
+            {!isLoggedin && (
               <Link className="nav-acc__dropdown-link" to="/login">
                 Log In
               </Link>
             )}
-            {currentUser && (
+            {isLoggedin && (
               <Link
                 className="nav-acc__dropdown-link"
                 to="/"
@@ -80,12 +79,12 @@ export default function Header() {
                 Log Out
               </Link>
             )}
-            {!currentUser && (
+            {!isLoggedin && (
               <Link className="nav-acc__dropdown-link" to="/signup">
                 Sign up
               </Link>
             )}
-            {currentUser && (
+            {isLoggedin && currentUser && (
               <Link
                 className="nav-acc__dropdown-link"
                 to={`/user/${currentUser.id}`}>

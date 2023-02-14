@@ -27,30 +27,21 @@ export default function EditProfilePage() {
     formData.append("bio", bio);
 
     const updateProfile = async () => {
-      const token = sessionStorage.getItem("JWTtoken");
-
-      await axios.patch(
-        `http://localhost:8080/user/edit/${currentUser.id}`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      // const getUserWithToken = async () => {
-      //   const { data } = await axios.get(
-      //     "http://localhost:8080/user/autologin",
-      //     {
-      //       headers: {
-      //         Authorization: `Bearer ${token}`,
-      //       },
-      //     }
-      //   );
-      //   setCurrentUser(data.user);
-      // };
-      // getUserWithToken();
-      setCurrentUser();
+      try {
+        const token = sessionStorage.getItem("JWTtoken");
+        await axios.patch(
+          `http://localhost:8080/user/edit/${currentUser.id}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setCurrentUser();
+      } catch (error) {
+        console.log(error);
+      }
     };
     updateProfile();
 
@@ -76,7 +67,7 @@ export default function EditProfilePage() {
           <textarea
             className="editprofile-form__input editprofile-form__input--bio"
             name="bio"
-            value={bio}
+            value={bio ?? ""}
             onChange={(e) => setBio(e.target.value)}></textarea>
         </label>
         <button className="editprofile-form__btn" type="submit">

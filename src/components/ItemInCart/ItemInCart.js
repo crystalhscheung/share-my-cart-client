@@ -1,59 +1,47 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./ItemInCart.scss";
 
-export default function ItemInCart({ item, getCart, setTotal }) {
+export default function ItemInCart({ item, getCart }) {
   const [quantityRequired, setQuantityRequired] = useState(
     item.quantity_required
   );
   const [itemTotal, setItemTotal] = useState(quantityRequired * item.price);
 
-  //   useEffect(() => {
-  //     let newItemTotal = quantityRequired * item.price;
-
-  //     setTotal((sum) => {
-  //       sum = sum - itemTotal + newItemTotal;
-  //       return sum;
-  //     });
-
-  //     setItemTotal(newItemTotal);
-  //     // setTotal(sum => sum+=itemTotal)
-  //   }, [quantityRequired]);
-
   useEffect(() => {
     const changeItemQuantity = async () => {
-      const token = sessionStorage.getItem("JWTtoken");
-
-      const { data } = await axios.put(
-        `http://localhost:8080/cart/${item.item_id}`,
-        { new_quantity_required: quantityRequired },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(data);
+      try {
+        const token = sessionStorage.getItem("JWTtoken");
+        await axios.put(
+          `http://localhost:8080/cart/${item.item_id}`,
+          { new_quantity_required: quantityRequired },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
     };
     changeItemQuantity();
     setItemTotal(quantityRequired * item.price);
     getCart();
-  }, [quantityRequired]);
+  }, [quantityRequired, item]);
 
   const removeFromCartHandler = () => {
     const removeItemFromCart = async () => {
-      const token = sessionStorage.getItem("JWTtoken");
-
-      const { data } = await axios.delete(
-        `http://localhost:8080/cart/${item.item_id}`,
-        {
+      try {
+        const token = sessionStorage.getItem("JWTtoken");
+        await axios.delete(`http://localhost:8080/cart/${item.item_id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
-      console.log(data);
+        });
+      } catch (error) {
+        console.log(error);
+      }
     };
     removeItemFromCart();
     getCart();
@@ -65,6 +53,7 @@ export default function ItemInCart({ item, getCart, setTotal }) {
         <div className="itemCart-imgs">
           <img
             className="itemCart-img"
+            alt={item.name}
             src={`http://localhost:8080/images/${item.images}`}
           />
         </div>

@@ -5,7 +5,7 @@ import { UserContext } from "../../context/UserContext";
 import "./ItemCard.scss";
 
 export default function ItemCard({ item }) {
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const [isThatUser, setIsThatUser] = useState(false);
   useEffect(() => {
     if (!currentUser) {
@@ -14,21 +14,21 @@ export default function ItemCard({ item }) {
     if (currentUser.id === item.user_id) {
       setIsThatUser(true);
     }
-  }, [currentUser]);
+  }, [currentUser, item]);
 
   const deleteHandler = (e) => {
     const deleteItem = async (e) => {
-      const token = sessionStorage.getItem("JWTtoken");
-
-      const { data } = await axios.delete(
-        `http://localhost:8080/items/${item.id}`,
-        {
+      try {
+        const token = sessionStorage.getItem("JWTtoken");
+        await axios.delete(`http://localhost:8080/items/${item.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
-      // console.log(data);
+        });
+        setCurrentUser();
+      } catch (error) {
+        console.log(error);
+      }
     };
     deleteItem();
   };
@@ -39,16 +39,19 @@ export default function ItemCard({ item }) {
       return;
     }
     const addItemToCart = async () => {
-      const { data } = await axios.post(
-        `http://localhost:8080/cart/${item.id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(data);
+      try {
+        await axios.post(
+          `http://localhost:8080/cart/${item.id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
     };
     addItemToCart();
   };
@@ -59,6 +62,7 @@ export default function ItemCard({ item }) {
       <div className="itemCard-imgs">
         <img
           className="itemCard-img"
+          alt={item.name}
           src={`http://localhost:8080/images/${item.images}`}
         />
       </div>
@@ -76,11 +80,13 @@ export default function ItemCard({ item }) {
             to={currentUser ? "/user/cart" : "/login"}
             onClick={addToCartHandler}
             className="itemCard-btn itemCard-btn__add">
-            +Cart
+            + cart
           </Link>
         )}
         {!isThatUser && (
-          <button className="itemCard-btn itemCard-btn__buy">Buy Now</button>
+          <Link to={"/checkout"} className="itemCard-btn itemCard-btn__buy">
+            Buy Now
+          </Link>
         )}
         {isThatUser && (
           <Link

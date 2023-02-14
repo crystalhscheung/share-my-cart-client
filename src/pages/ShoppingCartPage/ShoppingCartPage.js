@@ -10,12 +10,16 @@ export default function ShoppingCartPage() {
 
   const token = sessionStorage.getItem("JWTtoken");
   const getCart = async () => {
-    const { data } = await axios.get("http://localhost:8080/cart/", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setCart(data);
+    try {
+      const { data } = await axios.get("http://localhost:8080/cart/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCart(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

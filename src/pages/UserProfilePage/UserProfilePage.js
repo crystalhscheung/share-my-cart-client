@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ItemCard from "../../components/ItemCard/ItemCard";
+import { UserContext } from "../../context/UserContext";
 import "./UserProfilePage.scss";
 
 export default function UserProfilePage() {
@@ -9,21 +10,28 @@ export default function UserProfilePage() {
   const [isThatUser, setIsThatUser] = useState(false);
   const [avatar, setAvatar] = useState("");
   const { userId } = useParams();
+  const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
-    const token = sessionStorage.getItem("JWTtoken");
     const getProfile = async () => {
-      const { data } = await axios.get(`http://localhost:8080/user/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setIsThatUser(data.isThatUser);
-      setViewUser(data.user);
-      console.log(viewUser);
+      try {
+        const token = sessionStorage.getItem("JWTtoken");
+        const { data } = await axios.get(
+          `http://localhost:8080/user/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setIsThatUser(data.isThatUser);
+        setViewUser(data.user);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getProfile();
-  }, [userId]);
+  }, [userId, currentUser]);
 
   useEffect(() => {
     if (!viewUser) {
@@ -47,7 +55,7 @@ export default function UserProfilePage() {
         <h2 className="profile-data__name">{viewUser && viewUser.username}</h2>
         {isThatUser && (
           <Link to={`/user/edit/${viewUser.id}`} className="profile-data__edit">
-            Edit Avatar
+            Edit Profile
           </Link>
         )}
         {isThatUser && (

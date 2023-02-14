@@ -9,9 +9,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import UserProfilePage from "./pages/UserProfilePage/UserProfilePage";
 import ItemsPage from "./pages/ItemsPage/ItemsPage";
 import ItemDetail from "./pages/ItemDetailPage/ItemDetail";
-import { UserContext, UserContextProvider } from "./context/UserContext";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { UserContextProvider } from "./context/UserContext";
 import EditProfilePage from "./pages/EditProfilePage/EditProfilePage";
 import EditItemPage from "./pages/EditItemPage/EditItemPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage/ShoppingCartPage";
@@ -19,15 +17,9 @@ import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import CompletePaymentPage from "./pages/CompletePaymentPage/CompletePayment";
 
 function App() {
+  document.title = "Share my cart";
   return (
     <div className="App">
-      {/* <UserContext.Provider
-        value={{
-          isLoggedin: isLoggedin,
-          setIsLoggedin: setIsLoggedin,
-          currentUser: currentUser,
-          setCurrentUser: setCurrentUser,
-        }}> */}
       <UserContextProvider>
         <BrowserRouter>
           <Header />
@@ -48,7 +40,6 @@ function App() {
           <Footer />
         </BrowserRouter>
       </UserContextProvider>
-      {/* </UserContext.Provider> */}
     </div>
   );
 }

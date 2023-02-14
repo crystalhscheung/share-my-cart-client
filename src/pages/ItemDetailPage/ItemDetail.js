@@ -15,8 +15,14 @@ export default function ItemDetail() {
       return;
     }
     const getItem = async () => {
-      const { data } = await axios.get(`http://localhost:8080/items/${itemId}`);
-      setItem(data);
+      try {
+        const { data } = await axios.get(
+          `http://localhost:8080/items/${itemId}`
+        );
+        setItem(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getItem();
   }, [itemId]);
@@ -32,17 +38,17 @@ export default function ItemDetail() {
 
   const deleteHandler = (e) => {
     const deleteItem = async (e) => {
-      const token = sessionStorage.getItem("JWTtoken");
+      try {
+        const token = sessionStorage.getItem("JWTtoken");
 
-      const { data } = await axios.delete(
-        `http://localhost:8080/items/${item.id}`,
-        {
+        await axios.delete(`http://localhost:8080/items/${item.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
-      // console.log(data);
+        });
+      } catch (error) {
+        console.log(error);
+      }
     };
     deleteItem();
   };
@@ -53,16 +59,19 @@ export default function ItemDetail() {
       return;
     }
     const addItemToCart = async () => {
-      const { data } = await axios.post(
-        `http://localhost:8080/cart/${item.id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(data);
+      try {
+        await axios.post(
+          `http://localhost:8080/cart/${item.id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
     };
     addItemToCart();
   };
@@ -108,9 +117,11 @@ export default function ItemDetail() {
             </Link>
           )}
           {!isThatUser && (
-            <button className="detail-info-btn detail-info-btn__buy">
+            <Link
+              to={"/checkout"}
+              className="detail-info-btn detail-info-btn__buy">
               Buy Now
-            </button>
+            </Link>
           )}
           {isThatUser && (
             <Link

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ItemForm from "../../components/ItemForm/ItemForm";
 import { UserContext } from "../../context/UserContext";
@@ -19,23 +19,21 @@ export default function UploadItemPage() {
     formData.append("images", itemImage);
     formData.append("newItem", JSON.stringify(itemInfo));
 
-    const token = sessionStorage.getItem("JWTtoken");
-
     const uploadItem = async () => {
-      const { data } = await axios.post(
-        "http://localhost:8080/items/upload",
-        formData,
-        {
+      try {
+        const token = sessionStorage.getItem("JWTtoken");
+        await axios.post("http://localhost:8080/items/upload", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
-      console.log(data.newItemId);
-      setCurrentUser();
+        });
+        setCurrentUser();
+        navigate(`/user/${currentUser.id}`);
+      } catch (error) {
+        console.log(error);
+      }
     };
     uploadItem();
-    navigate(`/user/${currentUser.id}`);
   };
 
   return (

@@ -10,8 +10,14 @@ export default function EditItemPage() {
   const { itemId } = useParams();
   useEffect(() => {
     const getItem = async () => {
-      const { data } = await axios.get(`http://localhost:8080/items/${itemId}`);
-      setCurrentItem(data);
+      try {
+        const { data } = await axios.get(
+          `http://localhost:8080/items/${itemId}`
+        );
+        setCurrentItem(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getItem();
   }, [itemId]);
@@ -19,24 +25,27 @@ export default function EditItemPage() {
   const editItemHandler = (e, itemInfo, itemImage) => {
     e.preventDefault();
     const token = sessionStorage.getItem("JWTtoken");
-
     const formData = new FormData();
     formData.append("updatedItem", JSON.stringify(itemInfo));
     if (itemImage) {
       formData.append("images", itemImage);
     }
     const updateItem = async () => {
-      const { data } = await axios.patch(
-        `http://localhost:8080/items/edit/${itemInfo.id}`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      alert("Successfully updated item");
-      navigate(`/user/${currentItem.user_id}`);
+      try {
+        await axios.patch(
+          `http://localhost:8080/items/edit/${itemInfo.id}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        alert("Successfully updated item");
+        navigate(`/user/${currentItem.user_id}`);
+      } catch (error) {
+        console.log(error);
+      }
     };
     updateItem();
   };

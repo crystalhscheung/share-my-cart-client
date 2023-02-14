@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 export default function SignUpPage() {
-  const { setIsLoggedin, isLoggedin, currentUser, setCurrentUser } =
-    useContext(UserContext);
+  const { setIsLoggedin, isLoggedin, currentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -18,37 +17,24 @@ export default function SignUpPage() {
     e.preventDefault();
 
     const signup = async () => {
-      const { data } = await axios.post("http://localhost:8080/user/signup", {
-        username,
-        email,
-        password,
-      });
-      sessionStorage.setItem("JWTtoken", data.token);
-      setIsLoggedin(true);
-      // setCurrentUser();
-
-      // const token = sessionStorage.getItem("JWTtoken");
-      // const getUserWithToken = async () => {
-      //   const { data } = await axios.get(
-      //     "http://localhost:8080/user/autologin",
-      //     {
-      //       headers: {
-      //         Authorization: `Bearer ${token}`,
-      //       },
-      //     }
-      //   );
-      //   setCurrentUser(data.user);
-      // };
-      // getUserWithToken();
+      try {
+        const { data } = await axios.post("http://localhost:8080/user/signup", {
+          username,
+          email,
+          password,
+        });
+        sessionStorage.setItem("JWTtoken", data.token);
+        setIsLoggedin(true);
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
     };
     signup();
-    navigate("/");
   };
 
   const handleCallbackResponse = (res) => {
-    console.log("Encoded JWT ID token: " + res.credential);
     const googleUser = jwt_decode(res.credential);
-    console.log(googleUser);
 
     const userFromGoogle = {
       username: googleUser.given_name,
@@ -58,15 +44,18 @@ export default function SignUpPage() {
     };
 
     const loginWithGoogle = async () => {
-      const { data } = await axios.post(
-        "http://localhost:8080/user/google",
-        userFromGoogle
-      );
-      // console.log(data);
-      sessionStorage.setItem("JWTtoken", data.token);
-      setIsLoggedin(true);
-      console.log(isLoggedin, currentUser);
-      navigate("/");
+      try {
+        const { data } = await axios.post(
+          "http://localhost:8080/user/google",
+          userFromGoogle
+        );
+        sessionStorage.setItem("JWTtoken", data.token);
+        setIsLoggedin(true);
+        console.log(isLoggedin, currentUser);
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
     };
     loginWithGoogle();
   };

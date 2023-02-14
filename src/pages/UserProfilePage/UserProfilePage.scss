@@ -56,7 +56,6 @@
     gap: 1.6rem;
 
     @include tablet-up {
-      // width: 60%;
       flex-wrap: wrap;
       align-items: flex-start;
     }
