@@ -19,7 +19,7 @@ export default function EditItemPage() {
       }
     };
     getItem();
-  }, [itemId]);
+  }, [itemId, url]);
 
   const editItemHandler = (e, itemInfo, itemImage) => {
     e.preventDefault();

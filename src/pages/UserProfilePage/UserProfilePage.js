@@ -29,7 +29,7 @@ export default function UserProfilePage() {
       }
     };
     getProfile();
-  }, [userId, currentUser]);
+  }, [userId, currentUser, url]);
 
   useEffect(() => {
     if (!viewUser) {
@@ -42,7 +42,7 @@ export default function UserProfilePage() {
     } else if (viewUser.avatar) {
       setAvatar(`${url}/avatars/${viewUser.avatar}`);
     }
-  }, [viewUser]);
+  }, [viewUser, url]);
 
   return (
     <main className="profile">

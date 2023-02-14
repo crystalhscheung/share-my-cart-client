@@ -29,7 +29,7 @@ export default function ItemInCart({ item, getCart }) {
     changeItemQuantity();
     setItemTotal(quantityRequired * item.price);
     getCart();
-  }, [quantityRequired, item]);
+  }, [quantityRequired, item, url, getCart]);
 
   const removeFromCartHandler = () => {
     const removeItemFromCart = async () => {

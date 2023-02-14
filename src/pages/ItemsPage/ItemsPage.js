@@ -25,7 +25,7 @@ export default function ItemsPage() {
       }
     };
     getList();
-  }, [searchQuery]);
+  }, [searchQuery, url]);
 
   useEffect(() => {
     if (!categoryQuery) {
@@ -43,7 +43,7 @@ export default function ItemsPage() {
       }
     };
     getList();
-  }, [categoryQuery]);
+  }, [categoryQuery, url]);
 
   return (
     <main className="itemsPage">

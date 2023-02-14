@@ -24,7 +24,7 @@ export default function ItemDetail() {
       }
     };
     getItem();
-  }, [itemId]);
+  }, [itemId, url]);
 
   useEffect(() => {
     if (!currentUser || !item) {

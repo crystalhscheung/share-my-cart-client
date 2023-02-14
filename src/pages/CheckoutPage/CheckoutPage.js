@@ -15,7 +15,7 @@ export default function CheckoutPage() {
       const { publishableKey } = res.data;
       setStripePromise(loadStripe(publishableKey));
     });
-  }, []);
+  }, [url]);
 
   useEffect(() => {
     axios.post(`${url}/create-payment-intent`, {}).then((res) => {
@@ -23,7 +23,7 @@ export default function CheckoutPage() {
       console.log(clientSecret);
       setClientSecret(clientSecret);
     });
-  }, []);
+  }, [url]);
 
   return (
     <main className="checkout">
