@@ -8,7 +8,7 @@ import jwt_decode from "jwt-decode";
 export default function SignUpPage() {
   const { setIsLoggedin, isLoggedin, currentUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const url = process.env.BASE_API_URL;
+  const url = process.env.REACT_APP_API;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");

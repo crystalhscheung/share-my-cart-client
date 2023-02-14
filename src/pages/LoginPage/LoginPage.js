@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setIsLoggedin } = useContext(UserContext);
-  const url = process.env.BASE_API_URL;
+  const url = process.env.REACT_APP_API;
 
   const navigate = useNavigate();
 

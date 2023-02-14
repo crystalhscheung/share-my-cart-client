@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Carousel() {
   const { scrollRef } = useSnapCarousel();
   const [itemImages, setItemImages] = useState(null);
-  const url = process.env.BASE_API_URL;
+  const url = process.env.REACT_APP_API_URL;
   console.log(url);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function Carousel() {
       }
     };
     getAllItemImages();
-  }, []);
+  }, [url]);
 
   return (
     <>

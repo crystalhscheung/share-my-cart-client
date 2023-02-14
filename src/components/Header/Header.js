@@ -10,7 +10,7 @@ export default function Header() {
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState("");
   const { currentUser, setIsLoggedin, isLoggedin } = useContext(UserContext);
-  const url = process.env.BASE_API_URL;
+  const url = process.env.REACT_APP_API;
 
   const submitSearchHandler = (e) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ export default function Header() {
     } else if (currentUser.avatar) {
       setAvatar(`${url}/avatars/${currentUser.avatar}`);
     }
-  }, [currentUser, isLoggedin]);
+  }, [currentUser, isLoggedin, url]);
 
   return (
     <header className="header">

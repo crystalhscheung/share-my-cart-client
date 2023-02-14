@@ -8,7 +8,7 @@ import "./UploadItemPage.scss";
 export default function UploadItemPage() {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const url = process.env.BASE_API_URL;
+  const url = process.env.REACT_APP_API;
   const submitHandler = (e, itemInfo, itemImage) => {
     e.preventDefault();
 

@@ -8,7 +8,7 @@ export default function ItemsPage() {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("search");
   const categoryQuery = searchParams.get("category");
-  const url = process.env.BASE_API_URL;
+  const url = process.env.REACT_APP_API;
 
   const [itemList, setItemList] = useState(null);
 

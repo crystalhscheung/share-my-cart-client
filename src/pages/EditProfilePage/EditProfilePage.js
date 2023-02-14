@@ -9,7 +9,7 @@ export default function EditProfilePage() {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [avatar, setAvatar] = useState(null);
   const [bio, setBio] = useState("");
-  const url = process.env.BASE_API_URL;
+  const url = process.env.REACT_APP_API;
 
   useEffect(() => {
     if (!currentUser) {

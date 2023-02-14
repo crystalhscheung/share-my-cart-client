@@ -11,7 +11,7 @@ export default function UserProfilePage() {
   const [avatar, setAvatar] = useState("");
   const { userId } = useParams();
   const { currentUser } = useContext(UserContext);
-  const url = process.env.BASE_API_URL;
+  const url = process.env.REACT_APP_API;
 
   useEffect(() => {
     const getProfile = async () => {

@@ -8,7 +8,7 @@ export default function EditItemPage() {
   const navigate = useNavigate();
   const [currentItem, setCurrentItem] = useState(null);
   const { itemId } = useParams();
-  const url = process.env.BASE_API_URL;
+  const url = process.env.REACT_APP_API;
   useEffect(() => {
     const getItem = async () => {
       try {
