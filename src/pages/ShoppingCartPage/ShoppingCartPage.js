@@ -25,11 +25,12 @@ export default function ShoppingCartPage() {
 
   useEffect(() => {
     getCart();
-  }, []);
-
-  useEffect(() => {
     getCart();
   }, []);
+
+  // useEffect(() => {
+
+  // }, []);
 
   useEffect(() => {
     if (!cart) {
