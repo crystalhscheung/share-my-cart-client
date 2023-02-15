@@ -33,6 +33,7 @@ export default function Header() {
     if (!currentUser.avatar) {
       setAvatar(`${url}/avatars/avatar_placeholder.jpeg`);
     } else if (currentUser.avatar.slice(0, 5) === "https") {
+      console.log(currentUser.avatar);
       setAvatar(currentUser.avatar);
     } else if (currentUser.avatar) {
       setAvatar(`${url}/avatars/${currentUser.avatar}`);

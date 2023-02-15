@@ -33,6 +33,7 @@ export default function LoginPage() {
 
   const handleCallbackResponse = (res) => {
     const googleUser = jwt_decode(res.credential);
+    console.log(googleUser);
 
     const userFromGoogle = {
       username: googleUser.given_name,

@@ -11,6 +11,7 @@ export default function Carousel() {
   useEffect(() => {
     const getAllItemImages = async () => {
       try {
+        console.log(`${url}/items/images`);
         const { data } = await axios.get(`${url}/items/images`);
         setItemImages(data);
       } catch (error) {
