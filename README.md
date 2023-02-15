@@ -1,4 +1,5 @@
 # Share My Cart
+https://share-my-cart.netlify.app/
 
 Share my cart is an app that allows users to quickly and easily share their extra items before they purchase to make use of the discount, or after purchase, to reduce waste and also save money by not having to throw away items that you couldn't finish before the expiry date.
 
