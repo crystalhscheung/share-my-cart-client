@@ -28,10 +28,6 @@ export default function ShoppingCartPage() {
     getCart();
   }, []);
 
-  // useEffect(() => {
-
-  // }, []);
-
   useEffect(() => {
     if (!cart) {
       return;
