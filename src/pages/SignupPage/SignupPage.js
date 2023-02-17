@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 
 export default function SignUpPage() {
   const { setIsLoggedin, isLoggedin, currentUser } = useContext(UserContext);
+  const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
   const url = process.env.REACT_APP_API_URL;
 
@@ -16,6 +17,11 @@ export default function SignUpPage() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!username || !email || !password) {
+      setErrMsg("Please fill in all the information");
+      return;
+    }
 
     const signup = async () => {
       try {
@@ -28,7 +34,7 @@ export default function SignUpPage() {
         setIsLoggedin(true);
         navigate("/");
       } catch (error) {
-        console.log(error);
+        setErrMsg(error.response.data);
       }
     };
     signup();
@@ -100,6 +106,7 @@ export default function SignUpPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {errMsg && <span className="signup-form__err">{errMsg}</span>}
         <button className="signup-form__btn" type="submit">
           Sign up
         </button>

@@ -47,5 +47,10 @@
         background-color: $darkgreen-font;
       }
     }
+
+    &__err {
+      color: red;
+      font-size: 1.3rem;
+    }
   }
 }
