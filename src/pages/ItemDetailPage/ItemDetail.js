@@ -10,7 +10,6 @@ export default function ItemDetail() {
   const { itemId } = useParams();
   const { currentUser } = useContext(UserContext);
   const url = process.env.REACT_APP_API_URL;
-  console.log(url);
 
   useEffect(() => {
     if (!itemId) {
@@ -79,11 +78,13 @@ export default function ItemDetail() {
   return (
     <main className="detail">
       <div className="detail-img__wrapper">
-        <img
-          src={`${url}/images/${item && item.images}`}
-          alt={item && item.images}
-          className="detail-img"
-        />
+        {item && (
+          <img
+            src={`${url}/images/${item.images}`}
+            alt={item && item.images}
+            className="detail-img"
+          />
+        )}
       </div>
       <div className="detail-info">
         <h3 className="detail-info__name">{item && item.item_name}</h3>

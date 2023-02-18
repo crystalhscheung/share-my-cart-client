@@ -8,6 +8,7 @@ import jwt_decode from "jwt-decode";
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const { setIsLoggedin } = useContext(UserContext);
   const url = process.env.REACT_APP_API_URL;
 
@@ -15,6 +16,12 @@ export default function LoginPage() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!username || !password) {
+      setErrMsg("Please fill in all the information");
+      return;
+    }
+
     const login = async () => {
       try {
         const { data } = await axios.post(`${url}/user/login`, {
@@ -25,7 +32,7 @@ export default function LoginPage() {
         setIsLoggedin(true);
         navigate("/");
       } catch (error) {
-        console.log(error);
+        setErrMsg(error.response.data.error);
       }
     };
     login();
@@ -33,7 +40,6 @@ export default function LoginPage() {
 
   const handleCallbackResponse = (res) => {
     const googleUser = jwt_decode(res.credential);
-    console.log(googleUser);
 
     const userFromGoogle = {
       username: googleUser.given_name,
@@ -89,6 +95,7 @@ export default function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {errMsg && <span className="login-form__err">{errMsg}</span>}
         <button className="login-form__btn" type="submit">
           Log in
         </button>

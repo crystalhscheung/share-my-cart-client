@@ -31,7 +31,7 @@ export default function ItemsPage() {
     if (!categoryQuery) {
       return;
     }
-    console.log(categoryQuery);
+
     const getList = async () => {
       try {
         const { data } = await axios.get(

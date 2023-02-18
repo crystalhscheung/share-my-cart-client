@@ -7,6 +7,7 @@ import "./EditItemPage.scss";
 export default function EditItemPage() {
   const navigate = useNavigate();
   const [currentItem, setCurrentItem] = useState(null);
+  const [errMsg, setErrMsg] = useState("");
   const { itemId } = useParams();
   const url = process.env.REACT_APP_API_URL;
   useEffect(() => {
@@ -23,6 +24,16 @@ export default function EditItemPage() {
 
   const editItemHandler = (e, itemInfo, itemImage) => {
     e.preventDefault();
+
+    if (
+      !itemInfo.item_name ||
+      !itemInfo.price ||
+      !itemInfo.category ||
+      !itemInfo.quantity
+    ) {
+      setErrMsg("Please fill in all the required fields");
+      return;
+    }
     const token = sessionStorage.getItem("JWTtoken");
     const formData = new FormData();
     formData.append("updatedItem", JSON.stringify(itemInfo));
@@ -47,6 +58,7 @@ export default function EditItemPage() {
   return (
     <main className="editItem">
       <h2 className="editItem-title">Edit Item Details</h2>
+      {errMsg && <span className="signup-form__err">{errMsg}</span>}
       <ItemForm
         submitHandler={editItemHandler}
         currentItem={currentItem}
